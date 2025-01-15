@@ -31,7 +31,9 @@ export default function Writing() {
         <PageTransition>
           <main className="max-w-3xl">
             <div className="text-xl leading-relaxed text-gray-800">
-              <p>Writing section coming soon...</p>
+              <p>feast or famine</p>
+              <p>winning is everything</p>
+              <p>meow</p>
             </div>
           </main>
         </PageTransition>
