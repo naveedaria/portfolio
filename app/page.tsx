@@ -48,7 +48,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                Software engineer with a passion for art and creative expression.
+                Software engineer with a passion for meowing.
               </motion.h2>
               <motion.div 
                 className="space-y-8 text-lg sm:text-xl leading-relaxed text-muted-foreground"
