@@ -39,7 +39,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                Software engineer with a passion for meowing.
+                Software engineer with a passion for art and creative expression.
               </motion.h2>
               <motion.div 
                 className="space-y-8 text-lg sm:text-xl leading-relaxed text-gray-600 dark:text-gray-300"
@@ -52,8 +52,8 @@ export default function Home() {
                   that are both functionally elegant and aesthetically meaningful.
                 </p>
                 <p>
-                  Currently exploring the intersection of generative art and distributed 
-                  systems, pushing the boundaries of computational creativity.
+                Currently exploring the intersection of AI and developer tooling, while building real-time systems that scale.
+                Currently working at IBM, where I focus on modernizing legacy systems and creating real-time applications that serve thousands of users.
                 </p>
                 <div className="pt-4">
                   <Link 
