@@ -1,15 +1,14 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 export function AbstractAnimation() {
   return (
-    <div className="absolute right-0 top-1/3 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.15] pointer-events-none">
+    <div className="absolute right-0 top-1/3 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.15] dark:opacity-[0.2] pointer-events-none">
       <motion.svg
         viewBox="0 0 600 600"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full text-emerald-900"
+        className="w-full h-full text-emerald-900 dark:text-emerald-400"
       >
         <motion.path
           d="M150,150 C225,75 375,75 450,150 S525,300 450,450 S300,525 150,450 S75,300 150,150"

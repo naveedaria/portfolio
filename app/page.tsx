@@ -4,39 +4,30 @@ import { NavLink } from '@/components/nav-link'
 import { PageTransition } from '@/components/page-transition'
 import { SocialLinks } from '@/components/social-links'
 import { AbstractAnimation } from '@/components/abstract-animation'
-import { WalkingCat } from '@/components/walking-cat'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { ModeToggle } from '@/components/mode-toggle'
 
 export default function Home() {
   return (
     <div className="min-h-screen px-6 py-12 md:px-12 lg:px-24 flex justify-center items-start">
       <div className="w-full max-w-6xl">
         <header className="flex flex-col sm:flex-row items-center sm:items-baseline justify-between mb-16">
-          <motion.div 
-            className="space-y-2 mb-8 sm:mb-0"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="space-y-2 mb-8 sm:mb-0 text-center sm:text-left">
             <h1 className="text-3xl font-medium">
-              <Link href="/" className="hover:text-primary/80 transition-colors duration-300">
+              <Link href="/" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300">
                 Naveed Aria
               </Link>
             </h1>
             <SocialLinks />
-          </motion.div>
-          <motion.nav 
-            className="flex gap-8"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          </div>
+          <nav className="flex flex-wrap justify-center sm:justify-end items-center gap-4 sm:gap-8">
             <NavLink href="/projects">projects</NavLink>
-            <NavLink href="/writing">writing</NavLink>
+            {/* <NavLink href="/writing">writing</NavLink> */}
             <NavLink href="/resume">resume</NavLink>
             <NavLink href="/bookcase">bookcase</NavLink>
-          </motion.nav>
+            <ModeToggle />
+          </nav>
         </header>
 
         <PageTransition>
@@ -51,7 +42,7 @@ export default function Home() {
                 Software engineer with a passion for meowing.
               </motion.h2>
               <motion.div 
-                className="space-y-8 text-lg sm:text-xl leading-relaxed text-muted-foreground"
+                className="space-y-8 text-lg sm:text-xl leading-relaxed text-gray-600 dark:text-gray-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
@@ -77,7 +68,6 @@ export default function Home() {
             </div>
           </main>
           <AbstractAnimation />
-          <WalkingCat />
         </PageTransition>
       </div>
     </div>

@@ -10,7 +10,7 @@ export function SocialLinks() {
         href="https://github.com/naveedaria" 
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-black transition-colors duration-300"
+        className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors duration-300"
         aria-label="GitHub Profile"
       >
         <Github className="w-6 h-6" />
@@ -19,14 +19,14 @@ export function SocialLinks() {
         href="https://linkedin.com/in/naveedaria" 
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-400 hover:text-black transition-colors duration-300"
+        className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors duration-300"
         aria-label="LinkedIn Profile"
       >
         <Linkedin className="w-6 h-6" />
       </Link>
       <Link 
         href="mailto:naveedaria4@gmail.com"
-        className="text-gray-400 hover:text-black transition-colors duration-300"
+        className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors duration-300"
         aria-label="Email Me"
       >
         <Mail className="w-6 h-6" />

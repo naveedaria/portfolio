@@ -7,6 +7,7 @@ import { PageTransition } from '@/components/page-transition'
 import { SocialLinks } from '@/components/social-links'
 import Link from 'next/link'
 import { Star, X } from 'lucide-react'
+import { ModeToggle } from '@/components/mode-toggle'
 
 interface Book {
   id: number
@@ -49,11 +50,12 @@ export default function Bookcase() {
             </h1>
             <SocialLinks />
           </div>
-          <nav className="flex gap-4 sm:gap-8">
+          <nav className="flex items-center gap-4 sm:gap-8">
             <NavLink href="/projects">projects</NavLink>
-            <NavLink href="/writing">writing</NavLink>
+            {/* <NavLink href="/writing">writing</NavLink> */}
             <NavLink href="/resume">resume</NavLink>
             <NavLink href="/bookcase">bookcase</NavLink>
+            <ModeToggle />
           </nav>
         </header>
 

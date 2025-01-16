@@ -4,6 +4,7 @@ import { NavLink } from '@/components/nav-link'
 import { PageTransition } from '@/components/page-transition'
 import { SocialLinks } from '@/components/social-links'
 import Link from 'next/link'
+import { ModeToggle } from '@/components/mode-toggle'
 
 export default function Writing() {
   return (
@@ -20,11 +21,12 @@ export default function Writing() {
             </h1>
             <SocialLinks />
           </div>
-          <nav className="flex gap-8">
+          <nav className="flex items-center gap-8">
             <NavLink href="/projects">projects</NavLink>
             <NavLink href="/writing">writing</NavLink>
             <NavLink href="/resume">resume</NavLink>
             <NavLink href="/bookcase">bookcase</NavLink>
+            <ModeToggle />
           </nav>
         </header>
 
