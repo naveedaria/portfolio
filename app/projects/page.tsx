@@ -32,7 +32,7 @@ const projects: Project[] = [
     title: "WhereTo?",
     description: "A scalable location-based web application that helps groups find optimal meetup locations by leveraging MongoDB's geospatial queries and Google Places API integration.",
     technologies: ["JavaScript", "Express", "Node.js", "REST APIs", "Google Places API", ""],
-    image: "/whereto.png?height=400&width=600",
+    image: "/WhereTo.png",
     demoLink: "",
     githubLink: "https://github.com/techstartucalgary/decision-backend",
     year: "2022"
