@@ -7,6 +7,7 @@ import { AbstractAnimation } from '@/components/abstract-animation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ModeToggle } from '@/components/mode-toggle'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function Home() {
   return (
@@ -70,6 +71,7 @@ export default function Home() {
           <AbstractAnimation />
         </PageTransition>
       </div>
+      <Analytics />
     </div>
   )
 }
