@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <ParticleBackground />
           <ReadingProgress />
           {children}
