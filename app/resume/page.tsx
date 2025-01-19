@@ -42,7 +42,7 @@ export default function Resume() {
                   I'm a Software Engineer with a unique blend of technical and business acumen, holding degrees in both Computer Science and Finance. My passion lies in creating innovative solutions that bridge the gap between complex technology and practical business applications. With experience in both startup and enterprise environments, I bring a comprehensive understanding of how technology can drive business value.
                 </p>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Currently based in Toronto, I focus on building scalable applications and exploring the intersection of AI and software engineering. Outside of coding, I'm an avid reader and technology enthusiast who enjoys contributing to open-source projects and mentoring aspiring developers.
+                  Currently based in Toronto, I focus on building scalable applications and exploring the intersection of AI and software engineering. Outside of coding, I'm an avid reader and technology enthusiast.
                 </p>
               </div>
             </section>
