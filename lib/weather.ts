@@ -1,12 +1,27 @@
 export async function getWeather() {
   try {
-    const res = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=Toronto&aqi=no`
-    )
-    const data = await res.json()
+    const response = await fetch('/api/weather', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+      cache: 'no-store'
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      console.error('Weather fetch error:', {
+        status: response.status,
+        statusText: response.statusText,
+        data: errorData
+      })
+      return null
+    }
+
+    const data = await response.json()
     return data
   } catch (error) {
-    console.error('Error fetching weather:', error)
+    console.error('Weather fetch error:', error)
     return null
   }
 }

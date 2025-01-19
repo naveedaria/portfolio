@@ -16,20 +16,50 @@ interface WeatherData {
 
 export function WeatherInfo() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
+    let mounted = true
+
     async function fetchWeather() {
-      const data = await getWeather()
-      setWeather(data)
+      try {
+        setIsLoading(true)
+        const data = await getWeather()
+        
+        if (!mounted) return
+
+        if (data?.current?.temp_c !== undefined && data?.current?.condition?.text) {
+          setWeather(data)
+          setError(false)
+        } else {
+          console.error('Invalid weather data structure:', data)
+          setError(true)
+        }
+      } catch (err) {
+        if (!mounted) return
+        console.error('Weather component error:', err)
+        setError(true)
+      } finally {
+        if (mounted) {
+          setIsLoading(false)
+        }
+      }
     }
-    fetchWeather()
     
-    // Refresh weather every 5 minutes
+    fetchWeather()
     const interval = setInterval(fetchWeather, 5 * 60 * 1000)
-    return () => clearInterval(interval)
+    
+    return () => {
+      mounted = false
+      clearInterval(interval)
+    }
   }, [])
 
-  if (!weather?.current?.condition) return null
+  // Don't show anything while loading or if there's an error
+  if (isLoading || error || !weather?.current?.condition) {
+    return null
+  }
 
   return (
     <motion.div 

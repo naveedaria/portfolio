@@ -14,19 +14,20 @@ export default function Resume() {
       <div className="w-full max-w-6xl">
         <header className="flex flex-col sm:flex-row justify-between items-start mb-16">
           <div className="flex flex-col items-start gap-4 mb-8 sm:mb-0">
-            <Link 
-              href="/" 
-              className="text-2xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
-            >
-              Naveed Aria
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link 
+                href="/" 
+                className="text-2xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
+              >
+                Naveed Aria
+              </Link>
+              <WeatherInfo />
+            </div>
             <SocialLinks />
-            <WeatherInfo />
           </div>
           <nav className="flex items-center gap-8">
             <NavLink href="/projects">projects</NavLink>
             <NavLink href="/resume">resume</NavLink>
-            {/* <NavLink href="/bookcase">bookcase</NavLink> */}
             <ModeToggle />
           </nav>
         </header>
@@ -68,15 +69,11 @@ export default function Resume() {
                       <li>Spearheaded the migration of legacy systems to a modern microservices architecture</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Python</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Node.js</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">TypeScript</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Azure OpenAI</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">React</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">WebRTC</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Docker</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">PostgreSQL</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Web Sockets</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Kubernetes</span>
-
                     </div>
                   </div>
                 </motion.div>
@@ -101,9 +98,7 @@ export default function Resume() {
                       <li>Developed and integrated OAuth2-based authentication system for improved security</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Python</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">React</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">TypeScript</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">PostgreSQL</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Express</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">i18n</span>
@@ -125,7 +120,7 @@ export default function Resume() {
                   <div>
                     <h3 className="text-xl font-medium">University of Calgary</h3>
                     <p className="text-lg text-gray-600 dark:text-gray-400 italic">B.Sc in Computer Science</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Focus on Machine Learning and Distributed Systems</p>
                   </div>
                   <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2018 – 2023</span>
                 </motion.div>
@@ -138,7 +133,7 @@ export default function Resume() {
                   <div>
                     <h3 className="text-xl font-medium">University of Calgary</h3>
                     <p className="text-lg text-gray-600 dark:text-gray-400 italic">BComm. in Finance</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Minor in Data Analytics</p>
                   </div>
                   <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2018 – 2023</span>
                 </motion.div>

@@ -15,19 +15,20 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 py-12 md:px-12 lg:px-24">
         <header className="flex flex-col sm:flex-row justify-between items-start mb-16 sm:mb-32">
           <div className="flex flex-col items-start gap-4 mb-8 sm:mb-0">
-            <Link 
-              href="/" 
-              className="text-2xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
-            >
-              Naveed Aria
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link 
+                href="/" 
+                className="text-2xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
+              >
+                Naveed Aria
+              </Link>
+              <WeatherInfo />
+            </div>
             <SocialLinks />
-            <WeatherInfo />
           </div>
           <nav className="flex items-center gap-8">
             <NavLink href="/projects">projects</NavLink>
             <NavLink href="/resume">resume</NavLink>
-            {/* <NavLink href="/bookcase">bookcase</NavLink> */}
             <ModeToggle />
           </nav>
         </header>
