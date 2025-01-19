@@ -17,7 +17,7 @@ export default function Resume() {
             <div className="flex items-center gap-4">
               <Link 
                 href="/" 
-                className="text-2xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
+                className="text-3xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
               >
                 Naveed Aria
               </Link>
@@ -28,6 +28,7 @@ export default function Resume() {
           <nav className="flex items-center gap-8">
             <NavLink href="/projects">projects</NavLink>
             <NavLink href="/resume">resume</NavLink>
+            <NavLink href="/bookcase">bookcase</NavLink>
             <ModeToggle />
           </nav>
         </header>
