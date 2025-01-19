@@ -17,10 +17,10 @@ export function NavLink({ href, children }: NavLinkProps) {
     <Link 
       href={href} 
       className={cn(
-        "text-lg transition-colors duration-200",
+        "text-sm uppercase tracking-wide transition-colors duration-200",
         isActive 
-          ? "text-gray-900 dark:text-white font-medium" 
-          : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+          ? "text-emerald-900 dark:text-emerald-400 font-medium" 
+          : "text-gray-500 dark:text-gray-400 hover:text-emerald-800 dark:hover:text-emerald-500"
       )}
     >
       {children}

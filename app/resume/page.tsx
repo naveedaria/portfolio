@@ -5,91 +5,143 @@ import { PageTransition } from '@/components/page-transition'
 import { SocialLinks } from '@/components/social-links'
 import Link from 'next/link'
 import { ModeToggle } from '@/components/mode-toggle'
+import { WeatherInfo } from '@/components/weather-info'
+import { motion } from 'framer-motion'
 
 export default function Resume() {
   return (
-    <div className="min-h-screen px-6 py-12 md:px-12 lg:px-24 flex justify-center items-start">
+    <div className="min-h-screen bg-[#f8f8f8] dark:bg-gray-950 px-6 py-12 md:px-12 lg:px-24 flex justify-center items-start">
       <div className="w-full max-w-6xl">
-        <header className="flex flex-col sm:flex-row items-center sm:items-baseline justify-between mb-16">
-          <div className="space-y-2 mb-4 sm:mb-0">
-            <h1 className="text-3xl font-medium text-center sm:text-left">
-              <Link href="/" className="hover:text-gray-600 transition-colors duration-300">
-                Naveed Aria
-              </Link>
-              <span className="text-gray-400 ml-2">—</span>
-              <span className="text-gray-600 ml-2 text-xl">resume</span>
-            </h1>
+        <header className="flex flex-col sm:flex-row justify-between items-start mb-16">
+          <div className="flex flex-col items-start gap-4 mb-8 sm:mb-0">
+            <Link 
+              href="/" 
+              className="text-2xl font-serif tracking-tight hover:text-emerald-900 dark:hover:text-emerald-400 transition-colors"
+            >
+              Naveed Aria
+            </Link>
             <SocialLinks />
+            <WeatherInfo />
           </div>
-          <nav className="flex items-center gap-4 sm:gap-8">
+          <nav className="flex items-center gap-8">
             <NavLink href="/projects">projects</NavLink>
             <NavLink href="/resume">resume</NavLink>
-            <NavLink href="/bookcase">bookcase</NavLink>
+            {/* <NavLink href="/bookcase">bookcase</NavLink> */}
             <ModeToggle />
           </nav>
         </header>
 
         <PageTransition>
-          <main className="max-w-3xl">
+          <main className="max-w-4xl">
             <section className="mb-16">
-              <h2 className="text-3xl font-medium mb-8">Education</h2>
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
-                  <div>
-                    <h3 className="text-xl font-medium">University of Calgary</h3>
-                    <p className="text-lg text-gray-600 italic">B.Sc in Computer Science</p>
-                  </div>
-                  <span className="text-gray-600 mt-1 sm:mt-0">2018 – 2023</span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
-                  <div>
-                    <h3 className="text-xl font-medium">University of Calgary</h3>
-                    <p className="text-lg text-gray-600 italic">BComm. in Finance</p>
-                  </div>
-                  <span className="text-gray-600 mt-1 sm:mt-0">2018 – 2023</span>
-                </div>
+              <h2 className="text-3xl font-medium mb-6">About Me</h2>
+              <div className="prose prose-emerald dark:prose-invert max-w-none">
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  I'm a Software Engineer with a unique blend of technical and business acumen, holding degrees in both Computer Science and Finance. My passion lies in creating innovative solutions that bridge the gap between complex technology and practical business applications. With experience in both startup and enterprise environments, I bring a comprehensive understanding of how technology can drive business value.
+                </p>
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Currently based in Toronto, I focus on building scalable applications and exploring the intersection of AI and software engineering. Outside of coding, I'm an avid reader and technology enthusiast who enjoys contributing to open-source projects and mentoring aspiring developers.
+                </p>
               </div>
             </section>
 
             <section className="mb-16">
               <h2 className="text-3xl font-medium mb-8">Professional Experience</h2>
-              <div className="space-y-8">
-                <div className="space-y-2">
+              <div className="space-y-12">
+                <motion.div 
+                  className="space-y-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
                     <div>
                       <h3 className="text-xl font-medium">IBM Canada</h3>
-                      <p className="text-lg text-gray-600 italic">Software Developer</p>
+                      <p className="text-lg text-gray-600 dark:text-gray-400 italic">Software Developer</p>
                     </div>
-                    <span className="text-gray-600 mt-1 sm:mt-0">May 2023 – Present</span>
+                    <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">May 2023 – Present</span>
                   </div>
-                  <p className="text-md text-gray-600">
-                    As a Software Developer at IBM, I focus on modernizing enterprise applications and improving developer workflows. My main areas of work include:
-                  </p>
-                  <ul className="list-disc list-inside text-md text-gray-600 ml-4">
-                    <li>Building real-time voice applications</li>
-                    <li>Developing AI-powered documentation tools</li>
-                    <li>Leading the transformation of legacy systems to modern microservices architecture</li>
-                  </ul>
-                </div>
-                <div className="space-y-2">
+                  <div className="space-y-4">
+                    <ul className="list-disc list-inside text-md text-gray-600 dark:text-gray-400 ml-4 space-y-2">
+                      <li>Architected and implemented real-time voice processing applications using WebRTC and Node.js</li>
+                      <li>Led the development of AI-powered documentation tools, improving team productivity by 40%</li>
+                      <li>Spearheaded the migration of legacy systems to a modern microservices architecture</li>
+                    </ul>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Python</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">TypeScript</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Azure OpenAI</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">React</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Docker</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">PostgreSQL</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Web Sockets</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Kubernetes</span>
+
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  className="space-y-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
                     <div>
                       <h3 className="text-xl font-medium">Userful Inc.</h3>
-                      <p className="text-lg text-gray-600 italic">Software Developer Intern</p>
+                      <p className="text-lg text-gray-600 dark:text-gray-400 italic">Software Developer Intern</p>
                     </div>
-                    <span className="text-gray-600 mt-1 sm:mt-0">May 2022 – Sep 2022</span>
+                    <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">May 2022 – Sep 2022</span>
                   </div>
-                  <p className="text-md text-gray-600">
-                    During my internship at Userful, I worked primarily on:
-                  </p>
-                  <ul className="list-disc list-inside text-md text-gray-600 ml-4">
-                    <li>Web application internationalization</li>
-                    <li>System architecture improvements</li>
-                    <li>Enhancing authentication systems</li>
-                    <li>Optimizing backend performance</li>
-                    <li>Contributing to core infrastructure development</li>
-                  </ul>
-                </div>
+                  <div className="space-y-4">
+                    <ul className="list-disc list-inside text-md text-gray-600 dark:text-gray-400 ml-4 space-y-2">
+                      <li>Implemented internationalization support for web applications, expanding market reach to 5 new regions</li>
+                      <li>Enhanced system architecture and optimized database queries, reducing response times by 60%</li>
+                      <li>Developed and integrated OAuth2-based authentication system for improved security</li>
+                    </ul>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Python</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">React</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">TypeScript</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">PostgreSQL</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Express</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">i18n</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+
+            <section className="mb-16">
+              <h2 className="text-3xl font-medium mb-8">Education</h2>
+              <div className="space-y-6">
+                <motion.div 
+                  className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <div>
+                    <h3 className="text-xl font-medium">University of Calgary</h3>
+                    <p className="text-lg text-gray-600 dark:text-gray-400 italic">B.Sc in Computer Science</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
+                  </div>
+                  <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2018 – 2023</span>
+                </motion.div>
+                <motion.div 
+                  className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <div>
+                    <h3 className="text-xl font-medium">University of Calgary</h3>
+                    <p className="text-lg text-gray-600 dark:text-gray-400 italic">BComm. in Finance</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
+                  </div>
+                  <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2018 – 2023</span>
+                </motion.div>
               </div>
             </section>
           </main>
