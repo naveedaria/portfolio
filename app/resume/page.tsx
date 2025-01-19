@@ -28,7 +28,6 @@ export default function Resume() {
           <nav className="flex items-center gap-8">
             <NavLink href="/projects">projects</NavLink>
             <NavLink href="/resume">resume</NavLink>
-            <NavLink href="/bookcase">bookcase</NavLink>
             <ModeToggle />
           </nav>
         </header>
