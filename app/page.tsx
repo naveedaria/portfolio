@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ModeToggle } from '@/components/mode-toggle'
 import { motion } from 'framer-motion'
 import { TypingEffect } from '@/components/typing-effect'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -43,20 +44,20 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
               >
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight">
-                  Software Engineer & Creative Technologist
+                  Building Digital Experiences in Toronto
                 </h1>
                 <TypingEffect 
                   words={[
-                    "Building the future.",
-                    "Solving complex problems.",
-                    "Creating elegant solutions.",
-                    "Pushing boundaries."
+                    "Full-Stack Developer.",
+                    "Problem Solver.",
+                    "AI Enthusiast."
                   ]}
                   className="text-xl text-emerald-600 dark:text-emerald-400 font-medium mb-4"
                 />
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  I blend technical expertise with artistic sensibility, creating systems 
-                  that are both functionally elegant and aesthetically meaningful.
+                  Based in the heart of Toronto's tech hub, I create intuitive and 
+                  scalable solutions that bridge the gap between complex technical 
+                  challenges and real-world user needs.
                 </p>
               </motion.div>
             </div>
@@ -68,15 +69,17 @@ export default function Home() {
               transition={{ duration: 0.5 }}
             >
               <div className="relative">
-                <img 
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jGOaahzLqcCUhFgZ1SGvLBkMnWDwqn.png" 
-                  alt="Modern garden studio" 
-                  className="w-full rounded-lg relative z-10"
-                />
+                <div className="rounded-lg overflow-hidden">
+                  <Image 
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pNgQcR1rM00gWUJ2Vr0v32LFnukl95.png"
+                    alt="Autumn scene in Toronto with CN Tower in the background"
+                    width={800}
+                    height={600}
+                    className="w-full object-cover"
+                  />
+                </div>
                 <p className="text-sm text-center text-gray-500 dark:text-gray-400 mt-4 italic">
-                  A minimalist workspace where creativity meets functionality. 
-                  This serene environment, nestled in Toronto's tech district, 
-                  is where I bring innovative ideas to life through code.
+                  Catch me on a walk through Trinity Bellwoods Park!
                 </p>
               </div>
             </motion.div>

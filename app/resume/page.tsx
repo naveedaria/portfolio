@@ -64,16 +64,18 @@ export default function Resume() {
                   </div>
                   <div className="space-y-4">
                     <ul className="list-disc list-inside text-md text-gray-600 dark:text-gray-400 ml-4 space-y-2">
-                      <li>Architected and implemented real-time voice processing applications using WebRTC and Node.js</li>
-                      <li>Led the development of AI-powered documentation tools, improving team productivity by 40%</li>
-                      <li>Spearheaded the migration of legacy systems to a modern microservices architecture</li>
+                      <li>Architected and implemented real-time voice processing applications using WebSockets and realtime voice models</li>
+                      <li>Led the development of AI Agent powered documentation, and user story point tools</li>
+                      <li>Collaborated in the refactoring of a monolith backend service into microservices</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Node.js</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Python</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">TypeScript</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">WebRTC</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Node.js</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">React</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">PostgresSQL</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">WebSockets</span>
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Docker</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Kubernetes</span>
                     </div>
                   </div>
                 </motion.div>
@@ -93,15 +95,16 @@ export default function Resume() {
                   </div>
                   <div className="space-y-4">
                     <ul className="list-disc list-inside text-md text-gray-600 dark:text-gray-400 ml-4 space-y-2">
-                      <li>Implemented internationalization support for web applications, expanding market reach to 5 new regions</li>
-                      <li>Enhanced system architecture and optimized database queries, reducing response times by 60%</li>
-                      <li>Developed and integrated OAuth2-based authentication system for improved security</li>
+                      <li>Supported i18n implementation across React applications by configuring TypeScript language files and testing translations</li>
+                      <li>Improved API performance by 40% through GraphQL optimizations and caching implementations</li>
+                      <li>Developed secure authentication integrations for enterprise clients, supporting single sign-on across multiple providers</li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">React</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">PostgreSQL</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Express</span>
-                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">i18n</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">GoLang</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">Unix/Linux</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">GraphQL</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-xs">TypeScript</span>
                     </div>
                   </div>
                 </motion.div>
@@ -120,7 +123,7 @@ export default function Resume() {
                   <div>
                     <h3 className="text-xl font-medium">University of Calgary</h3>
                     <p className="text-lg text-gray-600 dark:text-gray-400 italic">B.Sc in Computer Science</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Focus on Machine Learning and Distributed Systems</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
                   </div>
                   <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2018 – 2023</span>
                 </motion.div>
@@ -133,7 +136,7 @@ export default function Resume() {
                   <div>
                     <h3 className="text-xl font-medium">University of Calgary</h3>
                     <p className="text-lg text-gray-600 dark:text-gray-400 italic">BComm. in Finance</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Minor in Data Analytics</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
                   </div>
                   <span className="text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2018 – 2023</span>
                 </motion.div>
