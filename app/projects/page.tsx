@@ -33,7 +33,7 @@ const projects: Project[] = [
   {
     title: "WhereTo?",
     description: "A scalable location-based web application that helps groups find optimal meetup locations by leveraging MongoDB's geospatial queries and Google Places API integration.",
-    technologies: ["JavaScript", "Express", "Node.js", "REST APIs", "Google Places API", ""],
+    technologies: ["JavaScript", "Express", "Node.js", "REST APIs", "Google Places API", "MongoDB"],
     image: "/WhereTo.png",
     demoLink: "",
     githubLink: "https://github.com/techstartucalgary/decision-backend",
@@ -47,6 +47,15 @@ const projects: Project[] = [
     demoLink: "https://www.canva.com/design/DAFAPDSQuaA/SWkz9_ZF8LleJCMrH7nb2A/view?utm_content=DAFAPDSQuaA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3882e4fac6",
     githubLink: "",
     year: "2022"
+  },
+  {
+    title: "Self Checkout System",
+    description: "Developed a robust self-checkout system backend using Spring Boot microservices, handling 500+ transactions per minute with real-time inventory updates and distributed payment processing. The system leverages Redis caching and PostgreSQL for high performance, maintaining sub-50ms response times and 98% test coverage.",
+    technologies: ["Java", "Swing", "PostgresSQL", "Redis", "Spring Boot", "JUnit", "Mockito"],
+    image: "/selfcheckout.jpg",
+    demoLink: "",
+    githubLink: "https://github.com/naveedaria/Self-Checkout-System",
+    year: "2021"
   },
 ]
 
