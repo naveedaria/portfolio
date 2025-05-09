@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="portfolio-page">
-    <div class="wip-overlay">
-        <div class="tape">WIP</div>
-    </div>
     <div class="main-content">
-        <h1><a href="index.html" style="text-decoration:none;color:inherit;">Naveed Aria</a></h1>
+        <h1><a href="index.html" style="text-decoration:none;color:inherit;position:relative;z-index:10001;">Naveed Aria</a></h1>
+        <div class="wip-overlay">
+            <div class="tape">WIP</div>
+        </div>
         <div class="content-wrapper">
             <div class="right-column">
                 <table class="portfolio-table">
@@ -62,12 +62,15 @@
 </html>
 
 <style>
+    .main-content {
+        position: relative;
+    }
     .wip-overlay {
-        position: fixed;
-        top: 0;
+        position: absolute;
+        top: 3.5em; /* Adjust if header height changes */
         left: 0;
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: calc(100% - 3.5em);
         background: rgba(255,255,255,0.92);
         z-index: 9999;
         display: flex;
