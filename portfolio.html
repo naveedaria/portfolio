@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="portfolio-page">
+    <div class="wip-overlay">
+        <div class="tape">WIP</div>
+    </div>
     <div class="main-content">
         <h1><a href="index.html" style="text-decoration:none;color:inherit;">Naveed Aria</a></h1>
         <div class="content-wrapper">
@@ -56,4 +59,32 @@
     </div>
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
+
+<style>
+    .wip-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255,255,255,0.92);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .tape {
+        background: repeating-linear-gradient(135deg, #f7e07a, #f7e07a 20px, #e2c44c 20px, #e2c44c 40px);
+        color: #222;
+        font-family: 'Noto Sans Mono', monospace;
+        font-size: 2.5em;
+        padding: 0.5em 2em;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        border: 2px solid #e2c44c;
+        transform: rotate(-4deg);
+        letter-spacing: 0.15em;
+        text-shadow: 1px 1px 0 #fff, 2px 2px 2px #e2c44c44;
+    }
+</style> 
