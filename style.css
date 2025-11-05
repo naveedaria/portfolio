@@ -456,6 +456,9 @@ body {
         margin-top: 0;
         margin-left: 0;
         flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
     }
     .portfolio-page .header-section {
         margin-bottom: 32px;
