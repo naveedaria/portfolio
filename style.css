@@ -41,6 +41,15 @@ body {
     gap: 12px;
 }
 
+.header-social-links-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 .header-social-links {
     display: flex;
     align-items: center;
@@ -428,8 +437,25 @@ body {
     .header-left {
         width: 100%;
     }
-    .header-social-links {
+    .header-social-links-wrapper {
         margin-top: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .header-social-links {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .portfolio-link {
+        margin-top: 0;
+        margin-left: 0;
+        flex-shrink: 0;
     }
     .portfolio-page .header-section {
         margin-bottom: 32px;
