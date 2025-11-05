@@ -1,6 +1,14 @@
 body {
     font-family: 'Noto Sans Mono', monospace;
-    background-color: #fff;
+    background-color: #fafafa;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.012) 2px,
+            rgba(0, 0, 0, 0.012) 4px
+        );
     color: #333;
     margin: 0;
     display: flex;
@@ -18,33 +26,179 @@ body {
     max-width: 840px;
 }
 
-.main-content > h1 {
-    margin: 0 0 25px 0;
+.header-section {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.header-social-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.main-content > h1,
+.header-section > h1,
+.header-left > h1 {
+    margin: 0;
     font-size: 2.6rem;
     font-weight: 600;
     color: #222;
     text-align: left;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.header-slash {
+    color: #999;
+    font-weight: 400;
+    font-size: 1.3rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.header-slash.visible {
+    opacity: 1;
+}
+
+.header-section-name {
+    color: #999;
+    font-weight: 400;
+    font-size: 1.3rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.header-section-name.visible {
+    opacity: 1;
+}
+
+.portfolio-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #999;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    line-height: 1;
+    padding: 4px 8px;
+    margin-left: 8px;
+    text-transform: uppercase;
+}
+
+.portfolio-text {
+    font-size: 1rem;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.portfolio-link:hover {
+    color: #333;
+    transform: translateX(4px);
+}
+
+.portfolio-link:hover .portfolio-text {
+    transform: translateX(-2px);
+}
+
+.page-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    will-change: opacity, transform;
+}
+
+.page-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .content-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    gap: 40px;
+    gap: 48px;
     align-items: flex-start;
 }
 
-.left-column {
-    flex-basis: auto;
-    flex-shrink: 0;
+.social-links {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e8e8e8;
 }
 
-.navigation-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.social-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+    border: none;
+    padding: 0;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+}
+
+.social-link:hover {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: color 0.3s ease, transform 0.2s ease;
+    border: none;
+    padding: 4px;
+}
+
+.icon-link:hover {
+    color: #007bff;
+    transform: translateY(-2px);
+    border-bottom: none;
+}
+
+.header-social-links .icon-link:hover {
+    color: #198754;
+}
+
+.icon-link svg {
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.separator {
+    color: #ccc;
+    font-weight: 300;
+    font-size: 0.9rem;
 }
 
 .email-row {
@@ -62,6 +216,8 @@ body {
     border-bottom: 1.5px solid #333;
     display: inline-block;
     align-self: flex-start;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    letter-spacing: 0.03em;
 }
 
 .styled-link:hover {
@@ -77,11 +233,12 @@ body {
 
 .lore-ipsum {
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.75;
     color: #444;
     margin: 0;
     max-width: none;
     text-align: left;
+    letter-spacing: -0.01em;
 }
 
 #copyMessage {
@@ -92,29 +249,6 @@ body {
     visibility: hidden;
 }
 
-#copyIndicator, #copyIndicatorFooter {
-    margin-left: 10px;
-    padding: 0;
-    min-width: 80px;
-    display: inline-block;
-    font-size: 1.1rem;
-    font-weight: 500;
-    border-radius: 0;
-    background: none;
-    color: #198754;
-    height: 1.1em;
-    align-items: center;
-    position: static;
-    vertical-align: middle;
-    transition: opacity 0.2s;
-    opacity: 0;
-    visibility: hidden;
-}
-
-#copyIndicator.visible, #copyIndicatorFooter.visible {
-    opacity: 1;
-    visibility: visible;
-}
 
 .portfolio-table {
     width: 100%;
@@ -125,72 +259,264 @@ body {
 }
 
 .project-row td {
-    padding: 18px 0 18px 0;
+    padding: 28px 0 28px 0;
     vertical-align: top;
+    transition: padding 0.2s ease;
+}
+
+.project-left {
+    padding-right: 40px;
+    width: 35%;
+}
+
+.project-right {
+    width: 65%;
+}
+
+.project-row:hover td {
+    padding-left: 6px;
 }
 
 .project-row:not(:last-child) td {
-    border-bottom: 1.5px solid #e0e0e0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.project-row:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.project-row {
+    transition: background-color 0.2s ease;
 }
 
 .project-title {
-    font-size: 1.18rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+    line-height: 1.3;
+}
+
+.project-row:hover .project-title {
+    color: #007bff;
+}
+
+.project-desc {
+    line-height: 1.7;
+    color: #444;
+}
+
+.project-demo-note {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.project-year {
+    font-size: 0.75em;
+    color: #999;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
 }
 
 .project-links {
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.project-links a {
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+}
+
+.project-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.project-link-item svg {
+    flex-shrink: 0;
+}
+
+/* GitHub icon color */
+.project-link-item[href*="github"] svg {
+    stroke: #24292e;
+}
+
+.project-link-item[href*="github"]:hover svg {
+    stroke: #24292e;
+}
+
+/* Demo/Play icon color */
+.project-link-item[href*="youtube"],
+.project-link-item[href*="canva"],
+.project-link-item[href*="demo"] {
+    color: #666;
+}
+
+.project-link-item[href*="youtube"] svg,
+.project-link-item[href*="canva"] svg {
+    stroke: #ff0000;
+}
+
+.project-link-item[href*="youtube"]:hover,
+.project-link-item[href*="canva"]:hover {
+    color: #ff0000;
+    border-bottom-color: #ff0000;
+}
+
+.project-link-item[href*="youtube"]:hover svg,
+.project-link-item[href*="canva"]:hover svg {
+    stroke: #ff0000;
+}
+
+/* GitHub hover styles */
+.project-link-item[href*="github"]:hover {
+    color: #24292e;
+    border-bottom-color: #24292e;
+}
+
+/* Default hover for other links */
+.project-links a:not([href*="github"]):not([href*="youtube"]):not([href*="canva"]):hover {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.project-links span {
+    color: #ccc;
+    font-size: 0.8em;
 }
 
 .project-tech {
     color: #666;
-    font-size: 0.98em;
-    margin-top: 0.5em;
+    font-size: 0.9em;
+    margin-top: 0.8em;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    font-style: italic;
 }
 
 .portfolio-table .project-row:first-child td {
     padding-top: 0;
 }
 
+.portfolio-page .content-wrapper {
+    margin-top: 0;
+}
+
 @media (max-width: 768px) {
     body {
         padding-top: 30px;
     }
-    .main-content > h1 {
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 24px;
+    }
+    .header-left {
+        width: 100%;
+    }
+    .header-social-links {
+        margin-top: 8px;
+    }
+    .portfolio-page .header-section {
+        margin-bottom: 32px;
+    }
+    .main-content > h1,
+    .header-section > h1,
+    .header-left > h1 {
         font-size: 2.2rem;
-        margin-bottom: 20px;
-        text-align: center;
+        margin-bottom: 0;
+        text-align: left;
+    }
+    .header-slash,
+    .header-section-name {
+        font-size: 1.1rem;
+    }
+    .portfolio-link {
+        font-size: 0.9rem;
+        margin-left: 0;
+        margin-top: 12px;
+    }
+    .portfolio-text {
+        font-size: 0.9rem;
+    }
+    .project-left {
+        padding-right: 20px;
+        width: 40%;
+    }
+    .project-right {
+        width: 60%;
     }
     .content-wrapper {
         flex-direction: column;
         gap: 20px;
         align-items: stretch;
     }
-    .left-column, .right-column {
+    .right-column {
         flex-basis: 100%;
     }
     .styled-link {
         font-size: 1rem;
     }
+    .social-link {
+        font-size: 0.9rem;
+    }
     .lore-ipsum {
         font-size: 0.95rem;
     }
-    .left-column {
-        order: 2;
-    }
-    .right-column {
-        order: 1;
-    }
+}
+
+.portfolio-page .header-section {
+    margin-bottom: 40px;
+}
+
+.portfolio-home-link {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 10001;
+    transition: opacity 0.2s ease;
+}
+
+.portfolio-home-link:hover {
+    opacity: 0.7;
+}
+
+.portfolio-back-link {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #999;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    line-height: 1;
+    padding: 4px 8px;
+    margin-left: 8px;
+}
+
+.portfolio-back-link:hover {
+    color: #333;
+    transform: translateX(-4px);
 }
 
 .portfolio-page .portfolio-table {
   margin-top: 0;
 }
 
-.portfolio-page .footer {
-  margin-top: 25px !important;
-}
+
 
 .portfolio-title {
     font-size: 1.1rem;

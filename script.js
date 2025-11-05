@@ -1,80 +1,70 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Page navigation
+    const portfolioLink = document.getElementById('portfolioLink');
+    const homeContent = document.getElementById('homeContent');
+    const portfolioContent = document.getElementById('portfolioContent');
+    let currentPage = 'home';
+
+    const headerSlash = document.getElementById('headerSlash');
+    const headerSection = document.getElementById('headerSection');
+
+    if (portfolioLink) {
+        portfolioLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            if (currentPage === 'home') {
+                // Switch to portfolio
+                homeContent.classList.remove('active');
+                setTimeout(() => {
+                    portfolioContent.classList.add('active');
+                    currentPage = 'portfolio';
+                    portfolioLink.innerHTML = '<span class="portfolio-text">HOME</span> ←';
+                    // Update header
+                    if (headerSlash) headerSlash.textContent = ' / ';
+                    if (headerSlash) headerSlash.classList.add('visible');
+                    if (headerSection) headerSection.textContent = 'Portfolio';
+                    if (headerSection) headerSection.classList.add('visible');
+                }, 150);
+            } else {
+                // Switch to home
+                portfolioContent.classList.remove('active');
+                setTimeout(() => {
+                    homeContent.classList.add('active');
+                    currentPage = 'home';
+                    portfolioLink.innerHTML = '<span class="portfolio-text">VIEW PORTFOLIO</span> →';
+                    // Update header
+                    if (headerSlash) headerSlash.classList.remove('visible');
+                    if (headerSection) headerSection.classList.remove('visible');
+                }, 150);
+            }
+        });
+    }
+
     const emailTextLink = document.getElementById('emailTextLink');
-    const copyIndicator = document.getElementById('copyIndicator');
     const emailToCopy = 'naveedaria4@gmail.com';
+    
+    const emailIconSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
+    const checkIconSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
     if (emailTextLink) {
         emailTextLink.addEventListener('click', function(event) {
             event.preventDefault();
 
             navigator.clipboard.writeText(emailToCopy).then(function() {
-                if (copyIndicator) {
-                    copyIndicator.textContent = '- Copied!';
-                    copyIndicator.classList.add('visible');
-                    copyIndicator.style.color = '#198754';
-                    copyIndicator.style.background = 'none';
-                    copyIndicator.style.borderRadius = '0';
-                    setTimeout(function() {
-                        copyIndicator.classList.remove('visible');
-                        copyIndicator.textContent = '';
-                        copyIndicator.style.color = '';
-                        copyIndicator.style.background = 'none';
-                        copyIndicator.style.borderRadius = '0';
-                    }, 3000);
-                }
+                // Change icon to checkmark
+                emailTextLink.innerHTML = checkIconSVG;
+                emailTextLink.style.color = '#198754';
+                
+                setTimeout(function() {
+                    // Change back to email icon
+                    emailTextLink.innerHTML = emailIconSVG;
+                    emailTextLink.style.color = '';
+                }, 2000);
             }).catch(function(err) {
-                if (copyIndicator) {
-                    copyIndicator.textContent = 'Failed!';
-                    copyIndicator.style.background = '#f8d7da';
-                    copyIndicator.style.color = '#721c24';
-                    copyIndicator.classList.add('visible');
-                    setTimeout(function() {
-                        copyIndicator.classList.remove('visible');
-                        copyIndicator.textContent = '';
-                        copyIndicator.style.background = '#d4edda';
-                        copyIndicator.style.color = '#155724';
-                    }, 3000);
-                }
+                // On error, briefly show different state if needed
+                console.error('Failed to copy email:', err);
             });
         });
     }
 
-    const emailTextLinkFooter = document.getElementById('emailTextLinkFooter');
-    const copyIndicatorFooter = document.getElementById('copyIndicatorFooter');
-
-    if (emailTextLinkFooter) {
-        emailTextLinkFooter.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            navigator.clipboard.writeText(emailToCopy).then(function() {
-                if (copyIndicatorFooter) {
-                    copyIndicatorFooter.textContent = '- Copied!';
-                    copyIndicatorFooter.classList.add('visible');
-                    copyIndicatorFooter.style.color = '#198754';
-                    copyIndicatorFooter.style.background = 'none';
-                    copyIndicatorFooter.style.borderRadius = '0';
-                    setTimeout(function() {
-                        copyIndicatorFooter.classList.remove('visible');
-                        copyIndicatorFooter.textContent = '';
-                        copyIndicatorFooter.style.color = '';
-                        copyIndicatorFooter.style.background = 'none';
-                        copyIndicatorFooter.style.borderRadius = '0';
-                    }, 3000);
-                }
-            }).catch(function(err) {
-                if (copyIndicatorFooter) {
-                    copyIndicatorFooter.textContent = 'Failed!';
-                    copyIndicatorFooter.style.background = '#f8d7da';
-                    copyIndicatorFooter.style.color = '#721c24';
-                    copyIndicatorFooter.classList.add('visible');
-                    setTimeout(function() {
-                        copyIndicatorFooter.classList.remove('visible');
-                        copyIndicatorFooter.textContent = '';
-                        copyIndicatorFooter.style.background = '#d4edda';
-                        copyIndicatorFooter.style.color = '#155724';
-                    }, 3000);
-                }
-            });
-        });
-    }
 }); 

@@ -12,23 +12,154 @@
 </head>
 <body>
     <div class="main-content">
-        <h1>Naveed Aria</h1>
-        <div class="content-wrapper">
-            <div class="left-column">
-                <nav class="navigation-links">
-                    <a href="/portfolio.html" id="portfolioLink" class="styled-link view-portfolio-link">VIEW PORTFOLIO</a>
-                    <a href="https://github.com/naveedaria" target="_blank" class="styled-link">GITHUB</a>
-                    <a href="https://www.linkedin.com/in/naveedaria/" target="_blank" class="styled-link">LINKEDIN</a>
-                    <div class="email-row"><a href="#" id="emailTextLink" class="styled-link">EMAIL</a><span id="copyIndicator"></span></div>
-                </nav>
-                <span id="copyMessage" style="display: none; font-size: 0.9em; color: green; margin-top: 8px;">Copied!</span>
+        <div class="header-section">
+            <div class="header-left">
+                <h1><span id="headerName">Naveed Aria</span><span id="headerSlash" class="header-slash"></span><span id="headerSection" class="header-section-name"></span></h1>
+                <div class="header-social-links">
+                    <a href="https://github.com/naveedaria" target="_blank" class="social-link icon-link" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/naveedaria/" target="_blank" class="social-link icon-link" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="#" id="emailTextLink" class="social-link icon-link" title="Email">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                    <!-- <a href="resume.pdf" target="_blank" class="social-link icon-link" title="Resume">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </a> -->
+                </div>
             </div>
-            <div class="right-column">
-                <p class="lore-ipsum">
-                    I’m currently working at IBM, where I design and build AI agents that interact with end users through voice and chat. I also develop the underlying platforms that power them. 
-                    My work spans AI product development, machine learning, and full-stack software engineering, and I enjoy solving complex problems, believing no problem is too hard.
-                    Checkout my portfolio for some of my personal projects and connect with me on Linkedin if you'd like to chat.
-                </p>
+            <a href="#" id="portfolioLink" class="portfolio-link"><span class="portfolio-text">VIEW PORTFOLIO</span> →</a>
+        </div>
+        
+        <!-- Home Content -->
+        <div id="homeContent" class="page-content active">
+            <div class="content-wrapper">
+                <div class="right-column">
+                    <p class="lore-ipsum">
+                        I'm currently working at IBM, where I design and build AI agents that interact with end users through voice and chat. I also develop the underlying platforms that power them. 
+                        My work spans AI product development, machine learning, and full-stack software engineering, and I enjoy solving complex problems, believing no problem is too hard.
+                        Checkout my portfolio for some of my personal projects and connect with me on Linkedin if you'd like to chat.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Content -->
+        <div id="portfolioContent" class="page-content">
+            <div class="content-wrapper">
+                <div class="right-column">
+                    <table class="portfolio-table">
+                        <tr class="project-row">
+                            <td class="project-left">
+                                <div class="project-title">Healthcare AI Voice Agent</div>
+                                <div class="project-year">2024</div>
+                                <div class="project-demo-note">Message me on LinkedIn or email for a demo.</div>
+                            </td>
+                            <td class="project-right">
+                                <div class="project-desc">
+                                    A custom AI voice agent accessible via Twilio, automating patient intake for healthcare providers by collecting demographics, insurance, and appointment preferences through natural conversation and external validation APIs.
+                                </div>
+                                <div class="project-tech">Python, FastAPI, Twilio, Voice AI, External APIs</div>
+                            </td>
+                        </tr>
+                        <tr class="project-row">
+                            <td class="project-left">
+                                <div class="project-title">AiRM Robotic Arm</div>
+                                <div class="project-year">2023</div>
+                                <div class="project-links">
+                                    <a href="https://www.youtube.com/watch?v=WiJtKO3sOtU" target="_blank" class="project-link-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                        Demo
+                                    </a>
+                                    <span>·</span>
+                                    <a href="https://github.com/techstartucalgary/roboticarm" target="_blank" class="project-link-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                        </svg>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="project-right">
+                                <div class="project-desc">A reinforcement learning-powered robotic control system that achieved 90% success rate in object manipulation tasks by implementing DDPG algorithm with PyTorch and integrating real-time computer vision capabilities.</div>
+                                <div class="project-tech">Python, PyTorch, MujoCo, OpenAI Gymnasium, OpenCV</div>
+                            </td>
+                        </tr>
+                        <tr class="project-row">
+                            <td class="project-left">
+                                <div class="project-title">WhereTo?</div>
+                                <div class="project-year">2022</div>
+                                <div class="project-links">
+                                    <a href="https://github.com/techstartucalgary/decision-backend" target="_blank" class="project-link-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                        </svg>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="project-right">
+                                <div class="project-desc">A scalable location-based web application that helps groups find optimal meetup locations by leveraging MongoDB's geospatial queries and Google Places API integration.</div>
+                                <div class="project-tech">JavaScript, Express, Node.js, REST APIs, Google Places API, MongoDB</div>
+                            </td>
+                        </tr>
+                        <tr class="project-row">
+                            <td class="project-left">
+                                <div class="project-title">Procidensa / Gaitonomics</div>
+                                <div class="project-year">2022</div>
+                                <div class="project-links">
+                                    <a href="https://www.canva.com/design/DAFAPDSQuaA/SWkz9_ZF8LleJCMrH7nb2A/view?utm_content=DAFAPDSQuaA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3882e4fac6" target="_blank" class="project-link-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                        Demo
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="project-right">
+                                <div class="project-desc">An award-winning healthcare solution that analyzes gait patterns using KNN prediction models to predict fall risk, validated through real-time demonstrations with over 20 participants and winning first place in the Innovation4Health Hackathon.</div>
+                                <div class="project-tech">Python, Node.js, NextJS, React, TensorFlow, Keras, MongoDB</div>
+                            </td>
+                        </tr>
+                        <tr class="project-row">
+                            <td class="project-left">
+                                <div class="project-title">Self Checkout System</div>
+                                <div class="project-year">2021</div>
+                                <div class="project-links">
+                                    <a href="https://github.com/naveedaria/Self-Checkout-System" target="_blank" class="project-link-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                        </svg>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="project-right">
+                                <div class="project-desc">Developed a robust self-checkout system backend using Spring Boot microservices, handling 500+ transactions per minute with real-time inventory updates and distributed payment processing. The system leverages Redis caching and PostgreSQL for high performance, maintaining sub-50ms response times and 98% test coverage.</div>
+                                <div class="project-tech">Java, Swing, PostgresSQL, Redis, Spring Boot, JUnit, Mockito</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
