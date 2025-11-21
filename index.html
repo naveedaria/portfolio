@@ -8,11 +8,493 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <!-- {/* Vercel Analytics */} -->
     <script src="/_vercel/insights/script.js" defer /> </script>
     <!-- Vercel Speed Insights -->
     <script src="/_vercel/speed-insights/script.js" defer /> </script>
+    <style>
+        body {
+            font-family: 'Noto Sans Mono', monospace;
+            background-color: #fafafa;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.012) 2px,
+                    rgba(0, 0, 0, 0.012) 4px
+                );
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .header-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .header-social-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 769px) {
+            .header-section {
+                position: relative;
+            }
+            .portfolio-link {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+            }
+        }
+
+        .main-content > h1,
+        .header-section > h1,
+        .header-left > h1 {
+            margin: 0;
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: #222;
+            text-align: left;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .header-slash {
+            color: #999;
+            font-weight: 400;
+            font-size: 1.3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-slash.visible {
+            opacity: 1;
+        }
+
+        .header-section-name {
+            color: #999;
+            font-weight: 400;
+            font-size: 1.3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-section-name.visible {
+            opacity: 1;
+        }
+
+        #headerName {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        #headerName:hover {
+            color: #007bff;
+        }
+
+        .portfolio-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #999;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            line-height: 1;
+            padding: 4px;
+            text-transform: uppercase;
+            margin-top: 0;
+            height: 28px;
+        }
+
+        .portfolio-text {
+            font-size: 0.85rem;
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .portfolio-link:hover {
+            color: #333;
+            transform: translateX(4px);
+        }
+
+        .portfolio-link:hover .portfolio-text {
+            transform: translateX(-2px);
+        }
+
+        .page-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            will-change: opacity, transform;
+        }
+
+        .page-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 48px;
+            align-items: flex-start;
+        }
+
+        .social-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            transition: all 0.2s ease;
+            border: none;
+            padding: 0;
+            border-bottom: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: color 0.3s ease, transform 0.2s ease;
+            border: none;
+            padding: 4px;
+        }
+
+        .icon-link:hover {
+            color: #007bff;
+            transform: translateY(-2px);
+            border-bottom: none;
+        }
+
+        .header-social-links .icon-link:hover {
+            color: #198754;
+        }
+
+        .icon-link svg {
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .right-column {
+            flex-basis: 0;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .lore-ipsum {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #444;
+            margin: 0;
+            max-width: none;
+            text-align: left;
+            letter-spacing: -0.01em;
+        }
+
+        /* Portfolio Cards Styles */
+        .portfolio-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 0;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .project-title-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            color: #222;
+            transition: color 0.2s ease;
+        }
+
+        .project-card:hover .project-title {
+            color: #007bff;
+        }
+
+        .project-year {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .project-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .project-link-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+        }
+
+        .project-link-item:hover {
+            background: #f8f9fa;
+            border-color: #e8e8e8;
+        }
+
+        .project-link-item svg {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .project-link-item[href*="github"]:hover {
+            color: #24292e;
+            border-color: #24292e;
+        }
+
+        .project-link-item[href*="github"] svg {
+            stroke: #24292e;
+        }
+
+        .project-link-item[href*="youtube"]:hover,
+        .project-link-item[href*="canva"]:hover {
+            color: #ff0000;
+            border-color: #ff0000;
+        }
+
+        .project-link-item[href*="youtube"] svg,
+        .project-link-item[href*="canva"] svg {
+            stroke: #ff0000;
+        }
+
+        .project-desc {
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .project-demo-note {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .tech-stack-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .tech-stack-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #495057;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .tech-badge:hover {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: #ffffff;
+            border-color: #007bff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 30px;
+            }
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 24px;
+            }
+            .header-left {
+                width: 100%;
+            }
+            .header-social-links {
+                margin-top: 8px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .portfolio-link {
+                position: static;
+                margin-left: auto;
+            }
+            .main-content > h1,
+            .header-section > h1,
+            .header-left > h1 {
+                font-size: 2.2rem;
+                margin-bottom: 0;
+                text-align: left;
+            }
+            .header-slash,
+            .header-section-name {
+                font-size: 1.1rem;
+            }
+            .portfolio-link {
+                font-size: 0.9rem;
+                margin-left: 8px;
+            }
+            .portfolio-text {
+                font-size: 0.9rem;
+            }
+            .content-wrapper {
+                flex-direction: column;
+                gap: 20px;
+                align-items: stretch;
+            }
+            .right-column {
+                flex-basis: 100%;
+            }
+            .lore-ipsum {
+                font-size: 0.95rem;
+            }
+            .project-card {
+                padding: 24px;
+            }
+            .project-title {
+                font-size: 1.2rem;
+            }
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .project-links {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-content">
@@ -38,15 +520,6 @@
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                     </a>
-                    <!-- <a href="resume.pdf" target="_blank" class="social-link icon-link" title="Resume">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                    </a> -->
                     <a href="#" id="portfolioLink" class="portfolio-link"><span class="portfolio-text">VIEW PORTFOLIO</span> →</a>
                 </div>
             </div>
@@ -69,24 +542,40 @@
         <div id="portfolioContent" class="page-content">
             <div class="content-wrapper">
                 <div class="right-column">
-                    <table class="portfolio-table">
-                        <tr class="project-row">
-                            <td class="project-left">
-                                <div class="project-title">Healthcare AI Voice Agent</div>
-                                <div class="project-year">2024</div>
-                                <div class="project-demo-note">Message me on LinkedIn or email for a demo.</div>
-                            </td>
-                            <td class="project-right">
-                                <div class="project-desc">
-                                    A custom AI voice agent accessible via Twilio, automating patient intake for healthcare providers by collecting demographics, insurance, and appointment preferences through natural conversation and external validation APIs.
+                    <div class="portfolio-grid">
+                        <!-- Project 1 -->
+                        <div class="project-card">
+                            <div class="project-header">
+                                <div class="project-title-section">
+                                    <div class="project-title">Healthcare AI Voice Agent</div>
+                                    <div class="project-year">2024</div>
                                 </div>
-                                <div class="project-tech">Python, FastAPI, Twilio, Voice AI, External APIs</div>
-                            </td>
-                        </tr>
-                        <tr class="project-row">
-                            <td class="project-left">
-                                <div class="project-title">AiRM Robotic Arm</div>
-                                <div class="project-year">2023</div>
+                                <div class="project-links">
+                                    <div class="project-demo-note">Message me on LinkedIn or email for a demo.</div>
+                                </div>
+                            </div>
+                            <div class="project-desc">
+                                A custom AI voice agent accessible via Twilio, automating patient intake for healthcare providers by collecting demographics, insurance, and appointment preferences through natural conversation and external validation APIs.
+                            </div>
+                            <div class="tech-stack-section">
+                                <span class="tech-stack-label">Tech Stack</span>
+                                <div class="tech-badges">
+                                    <span class="tech-badge">Python</span>
+                                    <span class="tech-badge">FastAPI</span>
+                                    <span class="tech-badge">Twilio</span>
+                                    <span class="tech-badge">Voice AI</span>
+                                    <span class="tech-badge">External APIs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card">
+                            <div class="project-header">
+                                <div class="project-title-section">
+                                    <div class="project-title">AiRM Robotic Arm</div>
+                                    <div class="project-year">2023</div>
+                                </div>
                                 <div class="project-links">
                                     <a href="https://www.youtube.com/watch?v=WiJtKO3sOtU" target="_blank" class="project-link-item">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -94,7 +583,6 @@
                                         </svg>
                                         Demo
                                     </a>
-                                    <span>·</span>
                                     <a href="https://github.com/techstartucalgary/roboticarm" target="_blank" class="project-link-item">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -102,16 +590,29 @@
                                         GitHub
                                     </a>
                                 </div>
-                            </td>
-                            <td class="project-right">
-                                <div class="project-desc">A reinforcement learning-powered robotic control system that achieved 90% success rate in object manipulation tasks by implementing DDPG algorithm with PyTorch and integrating real-time computer vision capabilities.</div>
-                                <div class="project-tech">Python, PyTorch, MujoCo, OpenAI Gymnasium, OpenCV</div>
-                            </td>
-                        </tr>
-                        <tr class="project-row">
-                            <td class="project-left">
-                                <div class="project-title">WhereTo?</div>
-                                <div class="project-year">2022</div>
+                            </div>
+                            <div class="project-desc">
+                                A reinforcement learning-powered robotic control system that achieved 90% success rate in object manipulation tasks by implementing DDPG algorithm with PyTorch and integrating real-time computer vision capabilities.
+                            </div>
+                            <div class="tech-stack-section">
+                                <span class="tech-stack-label">Tech Stack</span>
+                                <div class="tech-badges">
+                                    <span class="tech-badge">Python</span>
+                                    <span class="tech-badge">PyTorch</span>
+                                    <span class="tech-badge">MujoCo</span>
+                                    <span class="tech-badge">OpenAI Gymnasium</span>
+                                    <span class="tech-badge">OpenCV</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-card">
+                            <div class="project-header">
+                                <div class="project-title-section">
+                                    <div class="project-title">WhereTo?</div>
+                                    <div class="project-year">2022</div>
+                                </div>
                                 <div class="project-links">
                                     <a href="https://github.com/techstartucalgary/decision-backend" target="_blank" class="project-link-item">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -120,16 +621,30 @@
                                         GitHub
                                     </a>
                                 </div>
-                            </td>
-                            <td class="project-right">
-                                <div class="project-desc">A scalable location-based web application that helps groups find optimal meetup locations by leveraging MongoDB's geospatial queries and Google Places API integration.</div>
-                                <div class="project-tech">JavaScript, Express, Node.js, REST APIs, Google Places API, MongoDB</div>
-                            </td>
-                        </tr>
-                        <tr class="project-row">
-                            <td class="project-left">
-                                <div class="project-title">Procidensa / Gaitonomics</div>
-                                <div class="project-year">2022</div>
+                            </div>
+                            <div class="project-desc">
+                                A scalable location-based web application that helps groups find optimal meetup locations by leveraging MongoDB's geospatial queries and Google Places API integration.
+                            </div>
+                            <div class="tech-stack-section">
+                                <span class="tech-stack-label">Tech Stack</span>
+                                <div class="tech-badges">
+                                    <span class="tech-badge">JavaScript</span>
+                                    <span class="tech-badge">Express</span>
+                                    <span class="tech-badge">Node.js</span>
+                                    <span class="tech-badge">REST APIs</span>
+                                    <span class="tech-badge">Google Places API</span>
+                                    <span class="tech-badge">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="project-card">
+                            <div class="project-header">
+                                <div class="project-title-section">
+                                    <div class="project-title">Procidensa / Gaitonomics</div>
+                                    <div class="project-year">2022</div>
+                                </div>
                                 <div class="project-links">
                                     <a href="https://www.canva.com/design/DAFAPDSQuaA/SWkz9_ZF8LleJCMrH7nb2A/view?utm_content=DAFAPDSQuaA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3882e4fac6" target="_blank" class="project-link-item">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -138,16 +653,31 @@
                                         Demo
                                     </a>
                                 </div>
-                            </td>
-                            <td class="project-right">
-                                <div class="project-desc">An award-winning healthcare solution that analyzes gait patterns using KNN prediction models to predict fall risk, validated through real-time demonstrations with over 20 participants and winning first place in the Innovation4Health Hackathon.</div>
-                                <div class="project-tech">Python, Node.js, NextJS, React, TensorFlow, Keras, MongoDB</div>
-                            </td>
-                        </tr>
-                        <tr class="project-row">
-                            <td class="project-left">
-                                <div class="project-title">Self Checkout System</div>
-                                <div class="project-year">2021</div>
+                            </div>
+                            <div class="project-desc">
+                                An award-winning healthcare solution that analyzes gait patterns using KNN prediction models to predict fall risk, validated through real-time demonstrations with over 20 participants and winning first place in the Innovation4Health Hackathon.
+                            </div>
+                            <div class="tech-stack-section">
+                                <span class="tech-stack-label">Tech Stack</span>
+                                <div class="tech-badges">
+                                    <span class="tech-badge">Python</span>
+                                    <span class="tech-badge">Node.js</span>
+                                    <span class="tech-badge">NextJS</span>
+                                    <span class="tech-badge">React</span>
+                                    <span class="tech-badge">TensorFlow</span>
+                                    <span class="tech-badge">Keras</span>
+                                    <span class="tech-badge">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 5 -->
+                        <div class="project-card">
+                            <div class="project-header">
+                                <div class="project-title-section">
+                                    <div class="project-title">Self Checkout System</div>
+                                    <div class="project-year">2021</div>
+                                </div>
                                 <div class="project-links">
                                     <a href="https://github.com/naveedaria/Self-Checkout-System" target="_blank" class="project-link-item">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -156,17 +686,122 @@
                                         GitHub
                                     </a>
                                 </div>
-                            </td>
-                            <td class="project-right">
-                                <div class="project-desc">Developed a robust self-checkout system backend using Spring Boot microservices, handling 500+ transactions per minute with real-time inventory updates and distributed payment processing. The system leverages Redis caching and PostgreSQL for high performance, maintaining sub-50ms response times and 98% test coverage.</div>
-                                <div class="project-tech">Java, Swing, PostgresSQL, Redis, Spring Boot, JUnit, Mockito</div>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                            <div class="project-desc">
+                                Developed a robust self-checkout system backend using Spring Boot microservices, handling 500+ transactions per minute with real-time inventory updates and distributed payment processing. The system leverages Redis caching and PostgreSQL for high performance, maintaining sub-50ms response times and 98% test coverage.
+                            </div>
+                            <div class="tech-stack-section">
+                                <span class="tech-stack-label">Tech Stack</span>
+                                <div class="tech-badges">
+                                    <span class="tech-badge">Java</span>
+                                    <span class="tech-badge">Swing</span>
+                                    <span class="tech-badge">PostgreSQL</span>
+                                    <span class="tech-badge">Redis</span>
+                                    <span class="tech-badge">Spring Boot</span>
+                                    <span class="tech-badge">JUnit</span>
+                                    <span class="tech-badge">Mockito</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page navigation
+            const portfolioLink = document.getElementById('portfolioLink');
+            const homeContent = document.getElementById('homeContent');
+            const portfolioContent = document.getElementById('portfolioContent');
+            let currentPage = 'home';
+
+            const headerSlash = document.getElementById('headerSlash');
+            const headerSection = document.getElementById('headerSection');
+            const headerName = document.getElementById('headerName');
+
+            // Make header name clickable to return to home
+            if (headerName) {
+                headerName.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    // Only navigate if we're not already on home
+                    if (currentPage === 'portfolio') {
+                        portfolioContent.classList.remove('active');
+                        setTimeout(() => {
+                            homeContent.classList.add('active');
+                            currentPage = 'home';
+                            if (portfolioLink) {
+                                portfolioLink.innerHTML = '<span class="portfolio-text">VIEW PORTFOLIO</span> →';
+                            }
+                            // Update header
+                            if (headerSlash) headerSlash.classList.remove('visible');
+                            if (headerSection) headerSection.classList.remove('visible');
+                        }, 150);
+                    }
+                });
+            }
+
+            if (portfolioLink) {
+                portfolioLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    if (currentPage === 'home') {
+                        // Switch to portfolio
+                        homeContent.classList.remove('active');
+                        setTimeout(() => {
+                            portfolioContent.classList.add('active');
+                            currentPage = 'portfolio';
+                            portfolioLink.innerHTML = '<span class="portfolio-text">HOME</span> ←';
+                            // Update header
+                            if (headerSlash) headerSlash.textContent = ' / ';
+                            if (headerSlash) headerSlash.classList.add('visible');
+                            if (headerSection) headerSection.textContent = 'Portfolio';
+                            if (headerSection) headerSection.classList.add('visible');
+                        }, 150);
+                    } else {
+                        // Switch to home
+                        portfolioContent.classList.remove('active');
+                        setTimeout(() => {
+                            homeContent.classList.add('active');
+                            currentPage = 'home';
+                            portfolioLink.innerHTML = '<span class="portfolio-text">VIEW PORTFOLIO</span> →';
+                            // Update header
+                            if (headerSlash) headerSlash.classList.remove('visible');
+                            if (headerSection) headerSection.classList.remove('visible');
+                        }, 150);
+                    }
+                });
+            }
+
+            const emailTextLink = document.getElementById('emailTextLink');
+            const emailToCopy = 'naveedaria4@gmail.com';
+            
+            const emailIconSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
+            const checkIconSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+            if (emailTextLink) {
+                emailTextLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    navigator.clipboard.writeText(emailToCopy).then(function() {
+                        // Change icon to checkmark
+                        emailTextLink.innerHTML = checkIconSVG;
+                        emailTextLink.style.color = '#198754';
+                        
+                        setTimeout(function() {
+                            // Change back to email icon
+                            emailTextLink.innerHTML = emailIconSVG;
+                            emailTextLink.style.color = '';
+                        }, 2000);
+                    }).catch(function(err) {
+                        // On error, briefly show different state if needed
+                        console.error('Failed to copy email:', err);
+                    });
+                });
+            }
+
+        });
+    </script>
 </body>
-</html> 
+</html>
