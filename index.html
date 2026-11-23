@@ -4,805 +4,749 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naveed Aria</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐱</text></svg>">
+    <meta name="description" content="Naveed Aria — AI Software Engineer building production LLM agents, MCP integrations, and full-stack software.">
+    <meta property="og:title" content="Naveed Aria">
+    <meta property="og:description" content="AI Software Engineer building production LLM agents, MCP integrations, and full-stack software.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://naveedaria.com">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23111111'/><text x='16' y='22' text-anchor='middle' font-family='system-ui, -apple-system, sans-serif' font-size='17' font-weight='600' fill='%23fcfcfb'>N</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- {/* Vercel Analytics */} -->
-    <script src="/_vercel/insights/script.js" defer /> </script>
-    <!-- Vercel Speed Insights -->
-     <!-- Swag -->
-    <script src="/_vercel/speed-insights/script.js" defer /> </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
     <style>
-        body {
-            font-family: 'Noto Sans Mono', monospace;
-            background-color: #fafafa;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0, 0, 0, 0.012) 2px,
-                    rgba(0, 0, 0, 0.012) 4px
-                );
-            color: #333;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-top: 60px;
-            padding-left: 20px;
-            padding-right: 20px;
+        :root {
+            --bg: #fcfcfb;
+            --surface: #f4f4f1;
+            --text: #111111;
+            --text-secondary: #4a4a48;
+            --text-muted: #737370;
+            --border: #e8e8e4;
+            --border-strong: #d4d4ce;
+            --selection-bg: #111111;
+            --selection-text: #fcfcfb;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0c0c0c;
+            --surface: #161615;
+            --text: #ededeb;
+            --text-secondary: #a1a19d;
+            --text-muted: #787874;
+            --border: #222220;
+            --border-strong: #343430;
+            --selection-bg: #ededeb;
+            --selection-text: #0c0c0c;
+        }
+
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        .main-content {
+        ::selection {
+            background: var(--selection-bg);
+            color: var(--selection-text);
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 15px;
+            line-height: 1.65;
+            transition: background-color 0.3s ease, color 0.25s ease;
+        }
+
+        /* Static Studio Ghibli Sky Canopy */
+        .sky {
+            position: relative;
             width: 100%;
-            max-width: 900px;
+            height: 250px;
+            overflow: hidden;
+            pointer-events: none;
+            user-select: none;
+            background-color: #7ebae8;
         }
 
-        .header-section {
+        [data-theme="dark"] .sky {
+            background-color: #0b162a;
+        }
+
+        .sky-art {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center 42%;
+            background-repeat: no-repeat;
+            transition: opacity 0.45s ease;
+        }
+
+        .sky-art-day {
+            background-image: url('assets/sky-day.jpg');
+            opacity: 1;
+        }
+
+        .sky-art-night {
+            background-image: url('assets/sky-night.jpg');
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .sky-art-day {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .sky-art-night {
+            opacity: 1;
+        }
+
+        /* Seamless bottom horizon melt into page background */
+        .sky::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                transparent 46%,
+                color-mix(in srgb, var(--bg) 35%, transparent) 72%,
+                color-mix(in srgb, var(--bg) 82%, transparent) 88%,
+                var(--bg) 100%
+            );
+            z-index: 2;
+        }
+
+        main {
+            position: relative;
+            z-index: 5;
+            max-width: 640px;
+            margin: -28px auto 0;
+            padding: 0 24px 96px;
+        }
+
+        /* Header */
+        header {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 32px;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 36px;
         }
 
-        .header-left {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
+        .identity {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .header-social-links {
+        .identity h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            line-height: 1.3;
+            color: var(--text);
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
             gap: 16px;
-            flex-wrap: wrap;
+            flex-shrink: 0;
         }
 
-        @media (min-width: 769px) {
-            .header-section {
-                position: relative;
-            }
-            .portfolio-link {
-                position: absolute;
-                right: 0;
-                bottom: 0;
-            }
-        }
-
-        .main-content > h1,
-        .header-section > h1,
-        .header-left > h1 {
-            margin: 0;
-            font-size: 2.6rem;
-            font-weight: 600;
-            color: #222;
-            text-align: left;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        .header-slash {
-            color: #999;
-            font-weight: 400;
-            font-size: 1.3rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .header-slash.visible {
-            opacity: 1;
-        }
-
-        .header-section-name {
-            color: #999;
-            font-weight: 400;
-            font-size: 1.3rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .header-section-name.visible {
-            opacity: 1;
-        }
-
-        #headerName {
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        #headerName:hover {
-            color: #007bff;
-        }
-
-        .portfolio-link {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #999;
+        .nav-link {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            color: var(--text-muted);
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.2s ease;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            line-height: 1;
-            padding: 4px;
-            text-transform: uppercase;
-            margin-top: 0;
-            height: 28px;
-        }
-
-        .portfolio-text {
-            font-size: 0.85rem;
-            display: inline-block;
-            transition: transform 0.2s ease;
-        }
-
-        .portfolio-link:hover {
-            color: #333;
-            transform: translateX(4px);
-        }
-
-        .portfolio-link:hover .portfolio-text {
-            transform: translateX(-2px);
-        }
-
-        .page-content {
-            display: none;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            will-change: opacity, transform;
-        }
-
-        .page-content.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .content-wrapper {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            gap: 48px;
-            align-items: flex-start;
-        }
-
-        .social-link {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #333;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-            transition: all 0.2s ease;
+            background: none;
             border: none;
             padding: 0;
-            border-bottom: 1px solid transparent;
             cursor: pointer;
+            transition: color 0.15s ease;
+            line-height: 1;
         }
 
-        .social-link:hover {
-            color: #007bff;
-            border-bottom-color: #007bff;
+        .nav-link:hover {
+            color: var(--text);
         }
 
-        .icon-link {
+        .nav-link.copied {
+            color: var(--text);
+        }
+
+        .theme-toggle {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            transition: color 0.3s ease, transform 0.2s ease;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: none;
             border: none;
-            padding: 4px;
+            padding: 0;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.15s ease, background-color 0.15s ease, transform 0.2s ease;
         }
 
-        .icon-link:hover {
-            color: #007bff;
-            transform: translateY(-2px);
-            border-bottom: none;
+        .theme-toggle:hover {
+            color: var(--text);
+            background: var(--surface);
         }
 
-        .header-social-links .icon-link:hover {
-            color: #198754;
+        .theme-toggle:active {
+            transform: scale(0.92);
         }
 
-        .icon-link svg {
+        .theme-toggle svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .theme-toggle .icon-moon {
             display: block;
-            transition: transform 0.2s ease;
         }
 
-        .right-column {
-            flex-basis: 0;
-            flex-grow: 1;
-            text-align: left;
+        .theme-toggle .icon-sun {
+            display: none;
         }
 
-        .lore-ipsum {
-            font-size: 1rem;
-            line-height: 1.75;
-            color: #444;
-            margin: 0;
-            max-width: none;
-            text-align: left;
-            letter-spacing: -0.01em;
+        [data-theme="dark"] .theme-toggle .icon-sun {
+            display: block;
         }
 
-        /* Portfolio Cards Styles */
-        .portfolio-grid {
+        [data-theme="dark"] .theme-toggle .icon-moon {
+            display: none;
+        }
+
+        /* Intro */
+        .intro {
+            margin-bottom: 56px;
+        }
+
+        .intro p {
+            margin: 0 0 16px;
+            color: var(--text-secondary);
+            letter-spacing: -0.008em;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 52px;
+        }
+
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin: 0 0 20px;
+        }
+
+        /* Work */
+        .work-list {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            margin-top: 0;
+            gap: 28px;
         }
 
-        .project-card {
-            background: #ffffff;
-            border: 1px solid #e8e8e8;
-            border-radius: 8px;
-            padding: 32px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .work-item {
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
         }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .work-item:first-child {
+            padding-top: 0;
+            border-top: none;
         }
 
-        .project-card:hover {
-            border-color: #007bff;
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-header {
+        .item-top {
             display: flex;
+            align-items: baseline;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
             gap: 16px;
+            margin-bottom: 6px;
+        }
+
+        .item-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.015em;
+        }
+
+        .item-title span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .item-meta {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .item-desc {
+            margin: 0;
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            letter-spacing: -0.006em;
+        }
+
+        .work-points {
+            margin: 10px 0 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .work-points li {
+            position: relative;
+            padding-left: 14px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .work-points li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+        }
+
+        /* Projects */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-item {
+            padding: 18px 0;
+            border-top: 1px solid var(--border);
+            transition: border-color 0.15s ease;
+        }
+
+        .project-item:first-child {
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .project-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 6px;
             flex-wrap: wrap;
         }
 
-        .project-title-section {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            letter-spacing: -0.01em;
-            line-height: 1.3;
-            color: #222;
-            transition: color 0.2s ease;
-        }
-
-        .project-card:hover .project-title {
-            color: #007bff;
-        }
-
-        .project-year {
-            font-size: 0.75rem;
-            color: #999;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            display: inline-block;
-            padding: 4px 10px;
-            background: #f5f5f5;
-            border-radius: 4px;
+        .project-title-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
         }
 
         .project-links {
             display: flex;
             align-items: center;
+            gap: 14px;
+        }
+
+        .ext-link {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            transition: color 0.15s ease;
+        }
+
+        .ext-link .arrow {
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+
+        .ext-link:hover {
+            color: var(--text);
+        }
+
+        .ext-link:hover .arrow {
+            transform: translate(1.5px, -1.5px);
+        }
+
+        .muted-note {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .tech-line {
+            margin: 8px 0 0;
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            letter-spacing: -0.01em;
+        }
+
+        /* Info rows (Education & Stack) */
+        .info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-top: 2px;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 16px;
+            align-items: baseline;
+            font-size: 14px;
+        }
+
+        .info-key {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .info-val {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .info-val strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .project-link-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #666;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            padding: 6px 12px;
-            border-radius: 4px;
-            border: 1px solid transparent;
-        }
-
-        .project-link-item:hover {
-            background: #f8f9fa;
-            border-color: #e8e8e8;
-        }
-
-        .project-link-item svg {
-            flex-shrink: 0;
-            width: 16px;
-            height: 16px;
-        }
-
-        .project-link-item[href*="github"]:hover {
-            color: #24292e;
-            border-color: #24292e;
-        }
-
-        .project-link-item[href*="github"] svg {
-            stroke: #24292e;
-        }
-
-        .project-link-item[href*="youtube"]:hover,
-        .project-link-item[href*="canva"]:hover {
-            color: #ff0000;
-            border-color: #ff0000;
-        }
-
-        .project-link-item[href*="youtube"] svg,
-        .project-link-item[href*="canva"] svg {
-            stroke: #ff0000;
-        }
-
-        .project-desc {
-            line-height: 1.7;
-            color: #444;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .project-demo-note {
-            font-size: 0.85rem;
-            color: #888;
-            margin-top: 8px;
-            font-style: italic;
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border-radius: 4px;
-            border-left: 3px solid #ffc107;
-        }
-
-        .tech-stack-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .tech-stack-label {
-            font-size: 0.75rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .tech-badges {
+        .footer-links {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            align-items: center;
+            gap: 18px;
         }
 
-        .tech-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 1px solid #dee2e6;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #495057;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            letter-spacing: 0.01em;
+        .footer-copy {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11.5px;
+            color: var(--text-muted);
         }
 
-        .tech-badge:hover {
-            background: #007bff;
-            color: #ffffff;
-            border-color: #007bff;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding-top: 30px;
+        @media (max-width: 600px) {
+            .sky {
+                height: 175px;
             }
-            .header-section {
+
+            main {
+                margin-top: -20px;
+                padding: 0 20px 64px;
+            }
+
+            header {
                 flex-direction: column;
                 align-items: flex-start;
-                margin-bottom: 24px;
+                gap: 14px;
+                margin-bottom: 32px;
             }
-            .header-left {
-                width: 100%;
-            }
-            .header-social-links {
-                margin-top: 8px;
-                width: 100%;
-                justify-content: space-between;
-            }
-            .portfolio-link {
-                position: static;
-                margin-left: auto;
-            }
-            .main-content > h1,
-            .header-section > h1,
-            .header-left > h1 {
-                font-size: 2.2rem;
-                margin-bottom: 0;
-                text-align: left;
-            }
-            .header-slash,
-            .header-section-name {
-                font-size: 1.1rem;
-            }
-            .portfolio-link {
-                font-size: 0.9rem;
-                margin-left: 8px;
-            }
-            .portfolio-text {
-                font-size: 0.9rem;
-            }
-            .content-wrapper {
+
+            .item-top {
                 flex-direction: column;
-                gap: 20px;
-                align-items: stretch;
+                gap: 2px;
             }
-            .right-column {
-                flex-basis: 100%;
+
+            .info-row {
+                grid-template-columns: 1fr;
+                gap: 3px;
             }
-            .lore-ipsum {
-                font-size: 0.95rem;
-            }
-            .project-card {
-                padding: 24px;
-            }
-            .project-title {
-                font-size: 1.2rem;
-            }
-            .project-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .project-links {
-                width: 100%;
+
+            footer {
+                margin-top: 48px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-content">
-        <div class="header-section">
-            <div class="header-left">
-                <h1><span id="headerName">Naveed Aria</span><span id="headerSlash" class="header-slash"></span><span id="headerSection" class="header-section-name"></span></h1>
-                <div class="header-social-links">
-                    <a href="https://github.com/naveedaria" target="_blank" class="social-link icon-link" title="GitHub">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/naveedaria/" target="_blank" class="social-link icon-link" title="LinkedIn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </a>
-                    <a href="#" id="emailTextLink" class="social-link icon-link" title="Email">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                    </a>
-                    <a href="#" id="portfolioLink" class="portfolio-link"><span class="portfolio-text">VIEW PORTFOLIO</span> →</a>
-                </div>
+    <div class="sky" aria-hidden="true">
+        <div class="sky-art sky-art-day"></div>
+        <div class="sky-art sky-art-night"></div>
+    </div>
+    <main>
+        <header>
+            <div class="identity">
+                <h1>Naveed Aria</h1>
             </div>
+            <nav class="header-actions" aria-label="Links">
+                <a class="nav-link" href="Naveed_Aria_Resume.pdf" target="_blank" rel="noopener noreferrer" title="Naveed Aria Resume">Resume</a>
+                <a class="nav-link" href="https://github.com/naveedaria" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="nav-link" href="https://www.linkedin.com/in/naveedaria/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <button class="nav-link" id="emailBtn" type="button" title="Copy naveedaria4@gmail.com">Email</button>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                </button>
+            </nav>
+        </header>
+
+        <div class="intro">
+            <p>
+                I'm an ambitious, high-agency <strong>0-to-1 builder</strong> who likes taking messy, ambiguous problems and shipping real software around them.
+            </p>
+            <p>
+                Right now I'm at <strong>IBM</strong>, building production AI agents, MCP servers, and full-stack tools for enterprise operations and financial-services teams. I studied Computer Science and Finance at the University of Calgary, and I'm happiest when I get to talk directly to users, figure out what actually matters, and build it fast.
+            </p>
         </div>
-        
-        <!-- Home Content -->
-        <div id="homeContent" class="page-content active">
-            <div class="content-wrapper">
-                <div class="right-column">
-                    <p class="lore-ipsum">
-                        I'm currently working at IBM, where I design and build AI agents that interact with end users through voice and chat. I also develop the underlying platforms that power them. 
-                        My work spans AI product development, machine learning, and full-stack software engineering, and I enjoy solving complex problems, believing no problem is too hard.
-                        Checkout my portfolio for some of my personal projects and connect with me on Linkedin if you'd like to chat.
+
+        <section aria-labelledby="work-heading">
+            <h2 class="section-label" id="work-heading">Experience</h2>
+            <div class="work-list">
+                <article class="work-item">
+                    <div class="item-top">
+                        <div class="item-title">IBM <span>/ AI Software Developer</span></div>
+                        <div class="item-meta">2023 — Present</div>
+                    </div>
+                    <p class="item-desc">
+                        Forward-deployed and full-stack engineering across enterprise AI deployments, working directly with non-technical teams from discovery through production launch.
                     </p>
-                </div>
+                    <ul class="work-points">
+                        <li>Built production conversational and voice-enabled LLM agents (OpenAI Agents SDK, MCP servers) integrated into daily operational workflows and natural-language KPI querying.</li>
+                        <li>Architected event-driven multi-agent automation platforms (Python, .NET 8, cloud queues, MongoDB, OpenTelemetry) pairing LLM reasoning with deterministic validation and guardrails.</li>
+                        <li>Modernized regulated financial-services compliance workflows with custom reasoning agents and Go/SQL ETL pipelines, compressing multi-week manual reporting down to days.</li>
+                    </ul>
+                </article>
+
+                <article class="work-item">
+                    <div class="item-top">
+                        <div class="item-title">Userful <span>/ Software Developer Intern</span></div>
+                        <div class="item-meta">2022</div>
+                    </div>
+                    <p class="item-desc">
+                        Built a Linux D-Bus CLI tool in Go cutting boot time by 25% and dependency footprint by 30MB, shipped React/TypeScript internationalization, and benchmarked React Relay vs. Apollo Client to guide the team's GraphQL roadmap.
+                    </p>
+                </article>
             </div>
-        </div>
+        </section>
 
-        <!-- Portfolio Content -->
-        <div id="portfolioContent" class="page-content">
-            <div class="content-wrapper">
-                <div class="right-column">
-                    <div class="portfolio-grid">
-                        <!-- Project 1 -->
-                        <div class="project-card">
-                            <div class="project-header">
-                                <div class="project-title-section">
-                                    <div class="project-title">Healthcare AI Voice Agent</div>
-                                    <div class="project-year">2024</div>
-                                </div>
-                                <div class="project-links">
-                                    <div class="project-demo-note">Message me on LinkedIn or email for a demo.</div>
-                                </div>
-                            </div>
-                            <div class="project-desc">
-                                A custom AI voice agent accessible via Twilio, automating patient intake for healthcare providers by collecting demographics, insurance, and appointment preferences through natural conversation and external validation APIs.
-                            </div>
-                            <div class="tech-stack-section">
-                                <span class="tech-stack-label">Tech Stack</span>
-                                <div class="tech-badges">
-                                    <span class="tech-badge">Python</span>
-                                    <span class="tech-badge">FastAPI</span>
-                                    <span class="tech-badge">Twilio</span>
-                                    <span class="tech-badge">Voice AI</span>
-                                    <span class="tech-badge">External APIs</span>
-                                </div>
-                            </div>
+        <section aria-labelledby="projects-heading">
+            <h2 class="section-label" id="projects-heading">Selected Projects</h2>
+            <div class="project-list">
+                <article class="project-item">
+                    <div class="project-top">
+                        <div class="project-title-wrap">
+                            <span class="item-title">Healthcare AI Voice Agent</span>
+                            <span class="item-meta">2024</span>
                         </div>
-
-                        <!-- Project 2 -->
-                        <div class="project-card">
-                            <div class="project-header">
-                                <div class="project-title-section">
-                                    <div class="project-title">AiRM Robotic Arm</div>
-                                    <div class="project-year">2023</div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://www.youtube.com/watch?v=WiJtKO3sOtU" target="_blank" class="project-link-item">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                        </svg>
-                                        Demo
-                                    </a>
-                                    <a href="https://github.com/techstartucalgary/roboticarm" target="_blank" class="project-link-item">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                        </svg>
-                                        GitHub
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-desc">
-                                A reinforcement learning-powered robotic control system that achieved 90% success rate in object manipulation tasks by implementing DDPG algorithm with PyTorch and integrating real-time computer vision capabilities.
-                            </div>
-                            <div class="tech-stack-section">
-                                <span class="tech-stack-label">Tech Stack</span>
-                                <div class="tech-badges">
-                                    <span class="tech-badge">Python</span>
-                                    <span class="tech-badge">PyTorch</span>
-                                    <span class="tech-badge">MujoCo</span>
-                                    <span class="tech-badge">OpenAI Gymnasium</span>
-                                    <span class="tech-badge">OpenCV</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 3 -->
-                        <div class="project-card">
-                            <div class="project-header">
-                                <div class="project-title-section">
-                                    <div class="project-title">WhereTo?</div>
-                                    <div class="project-year">2022</div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/techstartucalgary/decision-backend" target="_blank" class="project-link-item">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                        </svg>
-                                        GitHub
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-desc">
-                                A scalable location-based web application that helps groups find optimal meetup locations by leveraging MongoDB's geospatial queries and Google Places API integration.
-                            </div>
-                            <div class="tech-stack-section">
-                                <span class="tech-stack-label">Tech Stack</span>
-                                <div class="tech-badges">
-                                    <span class="tech-badge">JavaScript</span>
-                                    <span class="tech-badge">Express</span>
-                                    <span class="tech-badge">Node.js</span>
-                                    <span class="tech-badge">REST APIs</span>
-                                    <span class="tech-badge">Google Places API</span>
-                                    <span class="tech-badge">MongoDB</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 4 -->
-                        <div class="project-card">
-                            <div class="project-header">
-                                <div class="project-title-section">
-                                    <div class="project-title">Procidensa / Gaitonomics</div>
-                                    <div class="project-year">2022</div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://www.canva.com/design/DAFAPDSQuaA/SWkz9_ZF8LleJCMrH7nb2A/view?utm_content=DAFAPDSQuaA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3882e4fac6" target="_blank" class="project-link-item">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                        </svg>
-                                        Demo
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-desc">
-                                An award-winning healthcare solution that analyzes gait patterns using KNN prediction models to predict fall risk, validated through real-time demonstrations with over 20 participants and winning first place in the Innovation4Health Hackathon.
-                            </div>
-                            <div class="tech-stack-section">
-                                <span class="tech-stack-label">Tech Stack</span>
-                                <div class="tech-badges">
-                                    <span class="tech-badge">Python</span>
-                                    <span class="tech-badge">Node.js</span>
-                                    <span class="tech-badge">NextJS</span>
-                                    <span class="tech-badge">React</span>
-                                    <span class="tech-badge">TensorFlow</span>
-                                    <span class="tech-badge">Keras</span>
-                                    <span class="tech-badge">MongoDB</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 5 -->
-                        <div class="project-card">
-                            <div class="project-header">
-                                <div class="project-title-section">
-                                    <div class="project-title">Self Checkout System</div>
-                                    <div class="project-year">2021</div>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://github.com/naveedaria/Self-Checkout-System" target="_blank" class="project-link-item">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                        </svg>
-                                        GitHub
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-desc">
-                                Developed a robust self-checkout system backend using Spring Boot microservices, handling 500+ transactions per minute with real-time inventory updates and distributed payment processing. The system leverages Redis caching and PostgreSQL for high performance, maintaining sub-50ms response times and 98% test coverage.
-                            </div>
-                            <div class="tech-stack-section">
-                                <span class="tech-stack-label">Tech Stack</span>
-                                <div class="tech-badges">
-                                    <span class="tech-badge">Java</span>
-                                    <span class="tech-badge">Swing</span>
-                                    <span class="tech-badge">PostgreSQL</span>
-                                    <span class="tech-badge">Redis</span>
-                                    <span class="tech-badge">Spring Boot</span>
-                                    <span class="tech-badge">JUnit</span>
-                                    <span class="tech-badge">Mockito</span>
-                                </div>
-                            </div>
+                        <div class="project-links">
+                            <span class="muted-note">Demo on request</span>
                         </div>
                     </div>
+                    <p class="item-desc">
+                        Twilio-connected voice agent automating patient intake — collecting demographics, insurance details, and scheduling preferences through natural conversation and external validation APIs.
+                    </p>
+                    <p class="tech-line">Python · FastAPI · Twilio · Voice AI</p>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-top">
+                        <div class="project-title-wrap">
+                            <span class="item-title">AiRM Robotic Arm</span>
+                            <span class="item-meta">2023</span>
+                        </div>
+                        <div class="project-links">
+                            <a class="ext-link" href="https://www.youtube.com/watch?v=WiJtKO3sOtU" target="_blank" rel="noopener noreferrer">Demo <span class="arrow">↗</span></a>
+                            <a class="ext-link" href="https://github.com/techstartucalgary/roboticarm" target="_blank" rel="noopener noreferrer">GitHub <span class="arrow">↗</span></a>
+                        </div>
+                    </div>
+                    <p class="item-desc">
+                        DDPG reinforcement learning controller trained in PyTorch and MuJoCo, transferred to a physical 7-DOF Kinova arm with OpenCV vision to reach 90% task accuracy on object manipulation.
+                    </p>
+                    <p class="tech-line">Python · PyTorch · MuJoCo · OpenAI Gymnasium · OpenCV</p>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-top">
+                        <div class="project-title-wrap">
+                            <span class="item-title">Gaitonomics</span>
+                            <span class="item-meta">2022</span>
+                        </div>
+                        <div class="project-links">
+                            <a class="ext-link" href="https://www.canva.com/design/DAFAPDSQuaA/SWkz9_ZF8LleJCMrH7nb2A/view?utm_content=DAFAPDSQuaA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3882e4fac6" target="_blank" rel="noopener noreferrer">Deck <span class="arrow">↗</span></a>
+                        </div>
+                    </div>
+                    <p class="item-desc">
+                        1st place ($5K) at Innovation4Health. Led 3 engineers and 2 clinicians to build a real-time KNN gait-analysis app scoring fall risk, live-demonstrated across 20+ participants.
+                    </p>
+                    <p class="tech-line">Python · Next.js · Node.js · AWS Lambda · DynamoDB</p>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-top">
+                        <div class="project-title-wrap">
+                            <span class="item-title">WhereTo?</span>
+                            <span class="item-meta">2022</span>
+                        </div>
+                        <div class="project-links">
+                            <a class="ext-link" href="https://github.com/techstartucalgary/decision-backend" target="_blank" rel="noopener noreferrer">GitHub <span class="arrow">↗</span></a>
+                        </div>
+                    </div>
+                    <p class="item-desc">
+                        Location-based web app helping groups find optimal meetup spots using MongoDB geospatial queries and the Google Places API.
+                    </p>
+                    <p class="tech-line">Node.js · Express · MongoDB · REST APIs</p>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-top">
+                        <div class="project-title-wrap">
+                            <span class="item-title">Self-Checkout Backend</span>
+                            <span class="item-meta">2021</span>
+                        </div>
+                        <div class="project-links">
+                            <a class="ext-link" href="https://github.com/naveedaria/Self-Checkout-System" target="_blank" rel="noopener noreferrer">GitHub <span class="arrow">↗</span></a>
+                        </div>
+                    </div>
+                    <p class="item-desc">
+                        Spring Boot microservices handling 500+ transactions per minute with Redis caching, PostgreSQL, sub-50ms response times, and 98% test coverage.
+                    </p>
+                    <p class="tech-line">Java · Spring Boot · PostgreSQL · Redis</p>
+                </article>
+            </div>
+        </section>
+
+        <section aria-labelledby="background-heading">
+            <h2 class="section-label" id="background-heading">Background</h2>
+            <div class="info-grid">
+                <div class="info-row">
+                    <span class="info-key">Education</span>
+                    <span class="info-val"><strong>University of Calgary</strong> — B.Sc. Computer Science &amp; B.Com. Finance</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Core Stack</span>
+                    <span class="info-val">TypeScript, React, Next.js, Python, FastAPI, Go, PostgreSQL, Azure, AWS, Docker, Kubernetes, Terraform</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">AI &amp; Agents</span>
+                    <span class="info-val">OpenAI Agents SDK, Claude Agent SDK, MCP, Multi-Agent Guardrails, Claude Code, Codex, PyTorch</span>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a class="nav-link" href="Naveed_Aria_Resume.pdf" target="_blank" rel="noopener noreferrer" title="Naveed Aria Resume">Resume</a>
+                <a class="nav-link" href="mailto:naveedaria4@gmail.com">naveedaria4@gmail.com</a>
+                <a class="nav-link" href="https://github.com/naveedaria" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="nav-link" href="https://www.linkedin.com/in/naveedaria/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <span class="footer-copy">Naveed Aria</span>
+        </footer>
+    </main>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Page navigation
-            const portfolioLink = document.getElementById('portfolioLink');
-            const homeContent = document.getElementById('homeContent');
-            const portfolioContent = document.getElementById('portfolioContent');
-            let currentPage = 'home';
+        (function() {
+            const emailBtn = document.getElementById('emailBtn');
+            const email = 'naveedaria4@gmail.com';
+            let copyTimer = null;
 
-            const headerSlash = document.getElementById('headerSlash');
-            const headerSection = document.getElementById('headerSection');
-            const headerName = document.getElementById('headerName');
-
-            // Make header name clickable to return to home
-            if (headerName) {
-                headerName.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    
-                    // Only navigate if we're not already on home
-                    if (currentPage === 'portfolio') {
-                        portfolioContent.classList.remove('active');
-                        setTimeout(() => {
-                            homeContent.classList.add('active');
-                            currentPage = 'home';
-                            if (portfolioLink) {
-                                portfolioLink.innerHTML = '<span class="portfolio-text">VIEW PORTFOLIO</span> →';
-                            }
-                            // Update header
-                            if (headerSlash) headerSlash.classList.remove('visible');
-                            if (headerSection) headerSection.classList.remove('visible');
-                        }, 150);
-                    }
-                });
-            }
-
-            if (portfolioLink) {
-                portfolioLink.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    
-                    if (currentPage === 'home') {
-                        // Switch to portfolio
-                        homeContent.classList.remove('active');
-                        setTimeout(() => {
-                            portfolioContent.classList.add('active');
-                            currentPage = 'portfolio';
-                            portfolioLink.innerHTML = '<span class="portfolio-text">HOME</span> ←';
-                            // Update header
-                            if (headerSlash) headerSlash.textContent = ' / ';
-                            if (headerSlash) headerSlash.classList.add('visible');
-                            if (headerSection) headerSection.textContent = 'Portfolio';
-                            if (headerSection) headerSection.classList.add('visible');
-                        }, 150);
+            if (emailBtn) {
+                emailBtn.addEventListener('click', function() {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(email).then(function() {
+                            emailBtn.textContent = 'Copied';
+                            emailBtn.classList.add('copied');
+                            clearTimeout(copyTimer);
+                            copyTimer = setTimeout(function() {
+                                emailBtn.textContent = 'Email';
+                                emailBtn.classList.remove('copied');
+                            }, 1800);
+                        }).catch(function() {
+                            window.location.href = 'mailto:' + email;
+                        });
                     } else {
-                        // Switch to home
-                        portfolioContent.classList.remove('active');
-                        setTimeout(() => {
-                            homeContent.classList.add('active');
-                            currentPage = 'home';
-                            portfolioLink.innerHTML = '<span class="portfolio-text">VIEW PORTFOLIO</span> →';
-                            // Update header
-                            if (headerSlash) headerSlash.classList.remove('visible');
-                            if (headerSection) headerSection.classList.remove('visible');
-                        }, 150);
+                        window.location.href = 'mailto:' + email;
                     }
                 });
             }
 
-            const emailTextLink = document.getElementById('emailTextLink');
-            const emailToCopy = 'naveedaria4@gmail.com';
-            
-            const emailIconSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
-            const checkIconSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-
-            if (emailTextLink) {
-                emailTextLink.addEventListener('click', function(event) {
-                    event.preventDefault();
-
-                    navigator.clipboard.writeText(emailToCopy).then(function() {
-                        // Change icon to checkmark
-                        emailTextLink.innerHTML = checkIconSVG;
-                        emailTextLink.style.color = '#198754';
-                        
-                        setTimeout(function() {
-                            // Change back to email icon
-                            emailTextLink.innerHTML = emailIconSVG;
-                            emailTextLink.style.color = '';
-                        }, 2000);
-                    }).catch(function(err) {
-                        // On error, briefly show different state if needed
-                        console.error('Failed to copy email:', err);
-                    });
-                });
+            const themeToggle = document.getElementById('themeToggle');
+            function syncToggleLabel() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+                themeToggle.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme');
             }
 
-        });
+            if (themeToggle) {
+                syncToggleLabel();
+                themeToggle.addEventListener('click', function() {
+                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    if (isDark) {
+                        document.documentElement.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    syncToggleLabel();
+                });
+            }
+        })();
     </script>
 </body>
 </html>
