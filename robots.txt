@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Machine-readable candidate dossier for AI agents and LLM crawlers
+# https://naveedaria.com/llms.txt
+# https://naveedaria.com/agents/

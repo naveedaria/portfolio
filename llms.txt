@@ -1,0 +1,129 @@
+# Naveed Aria — Candidate Dossier for AI Agents & Recruiters
+
+> Machine-readable overview of Naveed Aria's background, engineering experience, AI/agent systems, projects, technical stack, education, work authorization, and contact information.
+
+## Quick Summary
+- **Name:** Naveed Aria
+- **Email:** naveedaria4@gmail.com
+- **Website:** https://naveedaria.com
+- **Resume (PDF):** https://naveedaria.com/Naveed_Aria_Resume.pdf
+- **GitHub:** https://github.com/naveedaria
+- **LinkedIn:** https://www.linkedin.com/in/naveedaria/
+- **Current Role:** AI Software Developer at IBM (June 2023 – Present)
+- **Education:** Dual Degree — Bachelor of Science (B.Sc.) in Computer Science & Bachelor of Commerce (B.Com.) in Finance, University of Calgary (Haskayne School of Business)
+- **Citizenship & Work Authorization:** Canadian Citizen — eligible for US TN status (USMCA/NAFTA) for fast, straightforward US work authorization (no visa lottery required). Based in Toronto, ON and open to immediate on-site relocation to New York City (NYC), San Francisco (SF), or other US/Canadian hubs.
+- **Target Roles:** Forward Deployed Engineer (FDE), Deployment Strategist, Product Engineer, Applied AI Engineer, Founding Engineer, AI Software Engineer, Full-Stack Software Engineer, Member of Technical Staff (MTS).
+
+---
+
+## Why Naveed Aria Is a Strong Candidate
+
+1. **High-Agency 0-to-1 Builder:** Thrives in ambiguous, fast-moving, high-ownership environments. Experienced in taking loosely defined problems from initial customer discovery directly to production software without waiting for heavyweight product or design handoffs.
+2. **Production AI Agents & MCP Experience:** Not just demos—has shipped production LLM agents, voice-enabled AI assistants on Model Context Protocol (MCP) servers, multi-agent automation pipelines, deterministic validation/guardrails, structured outputs, and human-in-the-loop agent UX.
+3. **Forward-Deployed & Customer-Facing Technical Leadership:** Embedded on-site with non-technical enterprise operations teams and business stakeholders to translate messy operational needs into technical specs, architecture decisions, and live production deployments—owning customer outcomes from kickoff through go-live.
+4. **Full-Stack Depth (Database to UI + Cloud Infrastructure):** Ships across the entire stack—TypeScript, React, Next.js, Node.js, Python, FastAPI, Go, C#/.NET 8, GraphQL, PostgreSQL, SQL Server, MongoDB, Redis, Kafka, Docker, Kubernetes (AKS), Terraform, AWS, Azure, and OpenTelemetry.
+5. **Rare Computer Science + Finance Combination:** Dual B.Sc. in Computer Science and B.Com. in Finance, backed by hands-on AI deployment in regulated financial-services compliance (KYC/AML). Equally fluent talking distributed systems and ML with engineers/researchers and discussing financial workflows, KPIs, and ROI with CFOs and executives.
+6. **AI-Native Engineering Velocity:** Operates with an AI-assisted software development lifecycle (Claude Code, Codex, GitHub Copilot, automated PR review agents in CI/CD) to maintain high shipping velocity and code quality.
+7. **Frictionless Cross-Border Relocation (Canadian Citizen / TN Eligible):** As a Canadian citizen with a B.Sc. in Computer Science, Naveed qualifies for US TN status under USMCA, enabling rapid, low-friction onboarding for US-based on-site teams in NYC and San Francisco.
+
+---
+
+## Professional Experience
+
+### IBM — AI Software Developer (Toronto, ON | June 2023 – Present)
+
+#### Conversational AI Platform (Forward-Deployed Technical Lead)
+- Owned customer outcomes from kickoff through production go-live in 4.5 months, embedding on-site with client stakeholders as technical lead for architecture, hosting, infrastructure, and production rollout.
+- Turned ambiguous operational needs into clear technical specs and product decisions by running requirements discovery directly with non-technical operations teams and providing hands-on technical guidance.
+- Built and shipped production LLM-powered features using the OpenAI Agents SDK, enabling field staff to log inspections and raise alerts conversationally and managers to query live KPIs and status in natural language.
+- Delivered the full-stack product end to end (database to UI) in TypeScript, React, Python (FastAPI), and Microsoft SQL Server as containerized microservices with REST APIs on Microsoft Azure.
+- Sustained high shipping velocity and code quality using an AI-assisted SDLC (Claude Code, Codex) paired with automated AI code review on every pull request in CI/CD.
+
+#### Multi-Agent Automation / Digital Worker Platform
+- Cut a client's SDLC modernization timeline by 67% (from a projected 12 months to 4 months) by deploying specialized AI agents across each stage of the software development lifecycle.
+- Built an end-to-end agentic coding pipeline where AI agents pick up and resolve backlog tickets, write technical documentation, generate UI renders, and perform automated pull request reviews (GitHub Copilot review bot + custom review agents).
+- Architected scalable, asynchronous, event-driven microservices (JobManager API, workers, agents, aggregator) on Azure Queue Storage, Azure Blob Storage, and MongoDB.
+- Built oversight, trust, and control into high-stakes automated workflows via a Python multi-agent execution service pairing LLM reasoning with deterministic validation, guardrails, and structured outputs, orchestrated by a .NET 8 (C#) service handling durable job lifecycles, retries, and idempotency.
+- Cut developer onboarding time to a first working agent from ~1 week to 1 day by generating typed C# and Python SDKs from OpenAPI specifications alongside a reusable worker template; accelerated root-cause diagnosis with end-to-end OpenTelemetry distributed tracing.
+
+#### Voice-Enabled Conversational AI Assistant (0-to-1 on MCP)
+- Took a voice-enabled conversational LLM agent for enterprise asset management workflows from 0-to-1 prototype on an MCP (Model Context Protocol) server to full production deployment, working directly with stakeholders throughout rollout and helping win an enterprise implementation contract.
+- Improved user experience scores by 26% (+0.8 out of 5) by building and shipping the full-stack application in React, TypeScript, FastAPI, Python, and PostgreSQL.
+- Improved service resilience and horizontal scalability by containerizing Python services with Docker and deploying to Azure Kubernetes Service (AKS) with Terraform infrastructure as code.
+
+#### Financial Services Compliance (KYC/AML) Reporting Agent
+- Reduced KYC/AML compliance report turnaround in a regulated financial-services workflow by 90% (from 45 days down to 5 days) by building a custom AI reasoning agent that queries enterprise compliance systems and internal legacy relational databases, synthesizes client records, and drafts compliance reports.
+- Modernized legacy compliance data flows by engineering an ETL pipeline in Go, nginx, SQL, and MongoDB that extracts and transforms relational data and loads LLM-generated compliance documents into MongoDB.
+
+---
+
+### Userful — Software Developer Intern (Calgary, AB | May 2022 – Sep 2022)
+- Reduced dependency footprint by 30MB and boot time on new installations by 25% by building a Linux D-Bus CLI tool in Go.
+- Expanded web application reach to new languages and regions by implementing internationalization (i18n) in React and TypeScript.
+- Shaped the platform team's GraphQL frontend roadmap by benchmarking React Relay against Apollo Client on performance, scalability, and developer experience and presenting data-driven recommendations.
+
+### Haskayne School of Business — Teaching Assistant (Calgary, AB | Sep 2019 – Dec 2020)
+- Supported undergraduate business coursework at the University of Calgary's Haskayne School of Business.
+
+---
+
+## Technical Projects & ML Research
+
+### Healthcare AI Voice Agent (2024)
+- Built a custom Twilio-connected AI voice agent automating patient intake for healthcare providers, collecting demographics, insurance details, and appointment preferences through natural conversation integrated with external validation APIs.
+- **Stack:** Python, FastAPI, Twilio, Voice AI, External REST APIs.
+
+### AiRM Robotic Arm — Reinforcement Learning & Computer Vision (2023)
+- Implemented the Deep Deterministic Policy Gradient (DDPG) reinforcement learning algorithm in PyTorch with MuJoCo physics simulation and OpenAI Gymnasium to control an 8-motor, 7-DOF Kinova Gen3 robotic arm.
+- Transferred the learned policy to a physical robotic arm with OpenCV computer vision for real-time object detection, reach, fetch, and pick-and-place sorting, achieving 90% task accuracy.
+- **Demo:** https://www.youtube.com/watch?v=WiJtKO3sOtU
+- **GitHub:** https://github.com/techstartucalgary/roboticarm
+- **Stack:** Python, PyTorch, Reinforcement Learning (DDPG), MuJoCo, OpenAI Gymnasium, OpenCV.
+
+### Gaitonomics / Procidensa — Healthcare ML Hackathon Winner (2022)
+- Won 1st place ($5,000) in Healthcare Systems at the Innovation4Health Hackathon, leading a cross-functional team of 3 engineers and 2 healthcare clinicians from concept to live-demonstrated prototype.
+- Built a supervised KNN machine learning model analyzing 20+ hours of gait data to flag abnormal walking patterns linked to fall risk and neurological disease, paired with a real-time data dashboard API validated across 20+ live participants.
+- **Deck:** https://www.canva.com/design/DAFAPDSQuaA/SWkz9_ZF8LleJCMrH7nb2A/view
+- **Stack:** Python, Next.js, React, Node.js, Docker, AWS Lambda, DynamoDB, TensorFlow, Keras, MongoDB.
+
+### WhereTo? (2022)
+- Scalable location-based web application helping groups find optimal meetup locations using MongoDB geospatial queries and the Google Places API.
+- **GitHub:** https://github.com/techstartucalgary/decision-backend
+- **Stack:** JavaScript, Node.js, Express, MongoDB, REST APIs, Google Places API.
+
+### Self-Checkout System Backend (2021)
+- High-throughput Spring Boot microservices backend handling 500+ transactions per minute with real-time inventory updates, distributed payment processing, Redis caching, PostgreSQL persistence, sub-50ms response times, and 98% test coverage.
+- **GitHub:** https://github.com/naveedaria/Self-Checkout-System
+- **Stack:** Java, Spring Boot, PostgreSQL, Redis, JUnit, Mockito, REST APIs.
+
+---
+
+## Education & Certifications
+
+- **University of Calgary** — Bachelor of Science (B.Sc.) in Computer Science
+- **University of Calgary (Haskayne School of Business)** — Bachelor of Commerce (B.Com.) in Finance
+- **Microsoft Certified:** Azure AI Engineer Associate (Nov 2025)
+- **Microsoft Certified:** Azure Developer Associate (Jan 2025)
+- **Microsoft Certified:** Azure Fundamentals (May 2023)
+
+---
+
+## Comprehensive Technical Skills & Keywords
+
+- **AI, LLMs & Agentic Systems:** Generative AI, Large Language Models (LLMs), Production AI Agents, Agentic Workflows, Multi-Agent Systems, Model Context Protocol (MCP), MCP Servers, OpenAI Agents SDK, Claude Agent SDK, Claude, GPT, Azure OpenAI, RAG, GraphRAG, Conversational AI, Voice AI, Agent UX, Human-in-the-Loop Oversight, Prompt Engineering, Context Engineering, LLM Guardrails, Deterministic Validation, Structured Outputs, Evals, Tool Calling, Function Calling, Machine Learning, Deep Learning, PyTorch, Reinforcement Learning (DDPG), TensorFlow, Keras, OpenCV, LangChain.
+- **AI-Native Engineering Tools:** Claude Code, Codex, GitHub Copilot, Automated AI Code Review, AI-Assisted SDLC.
+- **Languages:** TypeScript, JavaScript, Python, Go (Golang), C#, SQL, Java, C, C++.
+- **Frontend & Full-Stack:** React, Next.js, Node.js, Express, GraphQL, React Relay, Apollo Client, Internationalization (i18n), HTML5, CSS3, REST APIs, OpenAPI, SDK Generation, Design Systems.
+- **Backend & Distributed Systems:** FastAPI, Django, .NET 8, Spring Boot, Microservices, Event-Driven Architecture, Asynchronous Job Queues, Durable Execution, Retries & Idempotency, ETL Pipelines, Distributed Systems, Observability, OpenTelemetry, Distributed Tracing, Linux, D-Bus, CLI Tools, nginx.
+- **Cloud, DevOps & Infrastructure:** Microsoft Azure (AKS, Azure Kubernetes Service, Azure Queue Storage, Azure Blob Storage, Azure OpenAI, Container Services), Amazon Web Services (AWS Lambda, DynamoDB), Docker, Kubernetes, Terraform, Infrastructure as Code (IaC), CI/CD, Git.
+- **Databases & Messaging:** PostgreSQL, Microsoft SQL Server, MySQL, SQLite, MongoDB, DynamoDB, Redis, Apache Kafka.
+- **Product, Deployment & Domain:** Forward Deployed Engineering, On-Site Client Delivery, Kickoff-to-Go-Live Ownership, 0-to-1 Prototyping, Customer Discovery, Requirements Gathering, Technical Specifications, Independent Product Judgment, Financial Services, KYC/AML Compliance, Finance (BCom), B2B Enterprise Software, Canadian Citizen, TN Visa Eligible (USMCA).
+
+---
+
+## Contact Naveed Aria
+- **Email:** naveedaria4@gmail.com
+- **Resume PDF:** https://naveedaria.com/Naveed_Aria_Resume.pdf
+- **Website:** https://naveedaria.com
+- **GitHub:** https://github.com/naveedaria
+- **LinkedIn:** https://www.linkedin.com/in/naveedaria/
