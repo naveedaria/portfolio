@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linq DevEx Teardown &amp; Mini-Spec — Naveed Aria</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Independent Technical Product Manager teardown of Linq's public docs, CLI, SDKs, webhook reliability, and voice/SIP surface by Naveed Aria.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23111111'/><text x='16' y='22' text-anchor='middle' font-family='system-ui, -apple-system, sans-serif' font-size='17' font-weight='600' fill='%23fcfcfb'>N</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfb;
+            --surface: #f4f4f1;
+            --surface-strong: #ecece7;
+            --text: #111111;
+            --text-secondary: #444442;
+            --text-muted: #737370;
+            --border: #e6e6e1;
+            --accent: #111111;
+            --p0-bg: #111111;
+            --p0-text: #fcfcfb;
+            --p1-bg: #e8e8e3;
+            --p1-text: #222220;
+            --defer-bg: transparent;
+            --defer-text: #737370;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0c0c0c;
+            --surface: #151514;
+            --surface-strong: #1e1e1c;
+            --text: #ededeb;
+            --text-secondary: #a3a39f;
+            --text-muted: #787874;
+            --border: #232320;
+            --accent: #ededeb;
+            --p0-bg: #ededeb;
+            --p0-text: #0c0c0c;
+            --p1-bg: #262623;
+            --p1-text: #e2e2de;
+            --defer-bg: transparent;
+            --defer-text: #787874;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14.5px;
+            line-height: 1.65;
+            transition: background-color 0.25s ease, color 0.2s ease;
+        }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px 96px;
+        }
+
+        /* Top bar */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding-bottom: 18px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar-left,
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .mono-link {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: color 0.15s ease;
+        }
+
+        .mono-link:hover {
+            color: var(--text);
+        }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.15s ease, background-color 0.15s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .theme-toggle svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .theme-toggle .icon-moon { display: block; }
+        .theme-toggle .icon-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+        /* Hero */
+        .kicker {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin: 0 0 10px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+            color: var(--text);
+        }
+
+        .lead {
+            margin: 0 0 22px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .scope-note {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .scope-note strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            margin-top: 48px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            margin: 0 0 6px;
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11.5px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        p {
+            margin: 0 0 12px;
+            color: var(--text-secondary);
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            background: var(--surface);
+            padding: 1.5px 5px;
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        pre {
+            margin: 14px 0 18px;
+            padding: 16px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            line-height: 1.65;
+            color: var(--text);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+        }
+
+        /* Friction items */
+        .friction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .friction-item {
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .friction-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .friction-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .friction-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.015em;
+        }
+
+        .friction-tag {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .friction-detail {
+            margin: 0 0 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .friction-impact {
+            margin: 0;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .friction-impact strong {
+            color: var(--text-secondary);
+        }
+
+        /* Priority table */
+        .priority-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .priority-row {
+            display: grid;
+            grid-template-columns: 74px 1fr;
+            gap: 16px;
+            align-items: start;
+            padding: 14px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.03em;
+            width: fit-content;
+        }
+
+        .badge.p0 {
+            background: var(--p0-bg);
+            color: var(--p0-text);
+        }
+
+        .badge.p1 {
+            background: var(--p1-bg);
+            color: var(--p1-text);
+        }
+
+        .badge.defer {
+            background: var(--defer-bg);
+            color: var(--defer-text);
+            border: 1px solid var(--border);
+        }
+
+        .priority-title {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0 0 4px;
+        }
+
+        .priority-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Spec subheadings */
+        h3 {
+            margin: 24px 0 8px;
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        ul {
+            margin: 0 0 14px;
+            padding-left: 18px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            main { padding: 36px 18px 72px; }
+            h1 { font-size: 21px; }
+            .priority-row { grid-template-columns: 1fr; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <nav class="topbar" aria-label="Navigation">
+            <div class="topbar-left">
+                <a class="mono-link" href="/">← naveedaria.com</a>
+            </div>
+            <div class="topbar-right">
+                <a class="mono-link" href="Naveed_Aria_Resume.pdf" target="_blank" rel="noopener noreferrer" title="Naveed Aria Resume">Resume PDF</a>
+                <a class="mono-link" href="https://github.com/naveedaria" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="mono-link" href="mailto:naveedaria4@gmail.com">naveedaria4@gmail.com</a>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <header>
+            <p class="kicker">Technical PM Teardown · Linq Developer Platform</p>
+            <h1>Cutting Time-to-First-Agent &amp; Hardening Webhook/Voice Observability</h1>
+            <p class="lead">
+                Before applying for the Technical Product Manager role, I audited Linq's public developer surface—quickstart, CLI, Node &amp; Python SDKs, webhook delivery semantics, and Voice/SIP docs—through the lens of a developer trying to ship a reliable messaging/voice agent into production.
+            </p>
+            <div class="scope-note">
+                <strong>Scope &amp; Sources Inspected:</strong> <code>docs.linqapp.com</code> (Quickstart, Auth, Webhooks, Messaging, Voice/SIP), <code>linq-team/linq-cli</code> (<code>@linqapp/cli</code>), <code>linq-team/linq-node</code> (<code>v0.86.3</code>), and <code>linq-team/linq-python</code> (<code>v0.71.3</code>). Everything below reflects directly observed behavior in the public docs and SDK source—no assumptions.
+            </div>
+        </header>
+
+        <!-- PART 1: FRICTION LOG -->
+        <section>
+            <h2>01 / Observed Developer Friction Log</h2>
+            <p class="section-title">5 concrete places developers lose momentum between signup and production</p>
+
+            <div class="friction-list">
+                <div class="friction-item">
+                    <div class="friction-head">
+                        <span class="friction-title">1. Three conflicting onboarding stories &amp; three env var names</span>
+                        <span class="friction-tag">Onboarding · Time-to-First-Run</span>
+                    </div>
+                    <p class="friction-detail">
+                        The <code>Quickstart</code> doc says you need <em>"A bearer token from your Linq representative."</em> The <code>Authentication</code> page says to self-generate a token at <code>dashboard.linqapp.com/api-tooling</code>, yet lower on the same page tells developers to <em>"Request new tokens periodically from your Linq representative."</em> Meanwhile, <code>linq-cli</code> already supports instant self-serve <code>linq signup</code> via email OTP. Across those same surfaces, env vars drift three ways: <code>LINQ_API_KEY</code> (docs), <code>LINQ_API_V3_API_KEY</code> (Stainless SDK default), and <code>LINQ_TOKEN</code> (CLI).
+                    </p>
+                    <p class="friction-impact">
+                        <strong>Why it matters:</strong> Developers hit unnecessary friction in the first 5 minutes—and bounce if they think sandbox testing requires a sales call when self-serve CLI signup already exists.
+                    </p>
+                </div>
+
+                <div class="friction-item">
+                    <div class="friction-head">
+                        <span class="friction-title">2. Quickstart vs. SDK README drift (plus empty <code>message: {}</code>)</span>
+                        <span class="friction-tag">SDK Ergonomics · Node &amp; Python</span>
+                    </div>
+                    <p class="friction-detail">
+                        <code>docs.linqapp.com</code> recommends starting with <code>POST /v3/messages</code> omitting <code>from</code> (auto line-pool selection). Both <code>linq-node</code> and <code>linq-python</code> READMEs instead show <code>chats.create</code> with a hardcoded <code>from</code> number and an empty <code>message: {}</code> object. Both SDKs also expose duplicate <code>phoneNumbers</code>/<code>phone_numbers</code> and <code>phonenumbers</code> namespaces, while <code>linq-python</code> omits <code>webhooks.unwrap()</code> from <code>api.md</code> (requiring an undocumented optional extra <code>pip install linq-python[webhooks]</code>) and lags behind <code>linq-node</code> on MCP server packaging.
+                    </p>
+                    <p class="friction-impact">
+                        <strong>Why it matters:</strong> Python is the primary language for AI agent developers. Hiding webhook verification behind an undocumented optional extra adds avoidable setup errors on first integration.
+                    </p>
+                </div>
+
+                <div class="friction-item">
+                    <div class="friction-head">
+                        <span class="friction-title">3. Webhook timeout + retry semantics create an AI-agent "double-text" trap</span>
+                        <span class="friction-tag">Webhooks · Agent Reliability</span>
+                    </div>
+                    <p class="friction-detail">
+                        Linq enforces a <code>10s</code> webhook response timeout with exponential backoff over 30 minutes (at-least-once, out-of-order possible). Multi-step AI agents frequently take 15–45s to call tools/LLMs; naive synchronous handlers time out, trigger retries, and send duplicate texts. Outbound deduplication via <code>message.idempotency_key</code> exists in the JSON body (not an HTTP header), but is undocumented in both SDK READMEs. Worse, manual replay via a Linq rep (up to ~70 min) mints a <em>new</em> <code>event_id</code>—silently bypassing consumer dedupe tables keyed on <code>event_id</code>.
+                    </p>
+                    <p class="friction-impact">
+                        <strong>Why it matters:</strong> Messaging agents are uniquely unforgiving—one duplicate or dropped reply breaks end-user trust immediately.
+                    </p>
+                </div>
+
+                <div class="friction-item">
+                    <div class="friction-head">
+                        <span class="friction-title">4. No zero-downtime webhook secret rotation</span>
+                        <span class="friction-tag">Webhooks · Production Security</span>
+                    </div>
+                    <p class="friction-detail">
+                        <code>signing_secret</code> (<code>whsec_...</code>) is returned once on <code>POST /v3/webhook-subscriptions</code> and cannot be rotated in place—rotating requires deleting and recreating the subscription. Because <code>target_url</code> must be unique per account, teams cannot stand up a parallel subscription on the same URL before tearing down the old one.
+                    </p>
+                    <p class="friction-impact">
+                        <strong>Why it matters:</strong> Even though Standard Webhooks natively supports space-separated dual signatures during rotation, developers currently have to accept brief webhook downtime or spin up throwaway endpoints to rotate keys.
+                    </p>
+                </div>
+
+                <div class="friction-item">
+                    <div class="friction-head">
+                        <span class="friction-title">5. Voice / SIP operational blind spots</span>
+                        <span class="friction-tag">Voice Channel · Debuggability</span>
+                    </div>
+                    <p class="friction-detail">
+                        Voice is API-only today with three debugging gaps: (a) neither <code>GET /v3/phone_numbers</code> nor <code>GET /v3/sip-profiles/{id}</code> returns which numbers are bound to which SIP profile (only <code>assigned_number_count</code>), forcing external state tracking; (b) <code>PUT .../sip-profile</code> takes ~5 minutes to propagate with no readiness status or event; (c) <code>call_voice.*</code> events and call records omit SIP failure codes/reasons and cover inbound calls only (Outbound Early Access has no webhooks or call history, and <code>linq-cli</code> has no Voice/SIP commands).
+                    </p>
+                    <p class="friction-impact">
+                        <strong>Why it matters:</strong> Developers wiring voice agents cannot self-diagnose failed SIP handshakes or verify whether a new profile assignment is live without escalating to support.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 2: PRIORITIZATION -->
+        <section>
+            <h2>02 / Roadmap Prioritization Call</h2>
+            <p class="section-title">What to build first vs. what can wait</p>
+            <p>
+                With a small product/eng team scaling both messaging and voice, the highest leverage is compressing <strong>Time-to-First-Successful-Run (TTFSR)</strong> and eliminating <strong>support-gated debugging</strong> before adding surface area.
+            </p>
+
+            <div class="priority-list">
+                <div class="priority-row">
+                    <span class="badge p0">P0 · Now</span>
+                    <div>
+                        <p class="priority-title">Unify Quickstart, Env Vars &amp; Python/Node Webhook Ergonomics</p>
+                        <p class="priority-desc">
+                            Lead docs with <code>linq signup</code> + <code>linq webhooks listen -f</code>; accept <code>LINQ_API_KEY</code> as a first-class fallback in CLI and Stainless SDKs; fix SDK README examples to match <code>POST /v3/messages</code>; document <code>webhooks.unwrap()</code> and <code>message.idempotency_key</code> prominently in both Node and Python (bundle <code>standardwebhooks</code> by default in <code>linq-python</code>). <strong>Metric moved:</strong> TTFSR (&lt;10 min) and sandbox→production conversion.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="priority-row">
+                    <span class="badge p0">P0 · Now</span>
+                    <div>
+                        <p class="priority-title">Self-Serve Webhook Delivery Inspector, Replay &amp; Dual-Key Rotation</p>
+                        <p class="priority-desc">
+                            Ship <code>GET /v3/webhook-subscriptions/{id}/deliveries</code>, self-serve replay that preserves <code>original_event_id</code>, and a 24h dual-signing-secret rotation endpoint (see mini-spec below). <strong>Metric moved:</strong> Support tickets for missed webhooks and production reliability rate.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="priority-row">
+                    <span class="badge p1">P1 · Next</span>
+                    <div>
+                        <p class="priority-title">Voice / SIP Observability &amp; Outbound Event Parity</p>
+                        <p class="priority-desc">
+                            Return <code>sip_profile_id</code> + <code>propagation_status</code> on <code>GET /v3/phone_numbers</code>; add <code>sip_status_code</code> and <code>failure_reason</code> to <code>call_voice.*</code> events; extend <code>call_voice.*</code> webhooks &amp; call records to Outbound Calling before exiting Early Access; add <code>linq voice</code> / <code>sip-profiles</code> commands to <code>linq-cli</code>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="priority-row">
+                    <span class="badge defer">Defer</span>
+                    <div>
+                        <p class="priority-title">Full Dashboard GUI for SIP Trunk Configuration</p>
+                        <p class="priority-desc">
+                            <strong>Why wait:</strong> Teams configuring SIP TLS trunks and SRTP codecs live in code, CLI, and Terraform. A read-only status view + CLI commands solves 90% of the pain at 20% of the engineering cost; wait until self-serve Voice volume justifies full CRUD UI.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="priority-row">
+                    <span class="badge defer">Defer</span>
+                    <div>
+                        <p class="priority-title">Warm Call Transfer &amp; Per-Call Dynamic SIP Headers</p>
+                        <p class="priority-desc">
+                            <strong>Why wait:</strong> Shipping advanced telephony features before outbound call logs and SIP failure diagnostics exist multiplies debugging load for both developers and Linq support. Lock in observability first.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 3: MINI-SPEC -->
+        <section>
+            <h2>03 / Mini-Spec (P0)</h2>
+            <p class="section-title">Agent-Safe Webhook Delivery Lifecycle, Replay &amp; Secret Rotation</p>
+            <p>
+                <strong>Goal:</strong> Let developers see every delivery attempt, inspect exact failure reasons, replay failed events without double-texting users, and rotate signing secrets with zero downtime—fully backward-compatible with existing <code>?version=2026-02-03</code> integrations.
+            </p>
+
+            <h3>1. Delivery State Machine</h3>
+<pre><code>queued ──▶ delivering ──▶ delivered (2xx within 10s)
+               │
+               ├── (5xx / 429 / timeout / conn err, attempts &lt; 10 &amp; window &lt; 30m)
+               ▼
+            retrying ──▶ delivering (exp backoff + jitter, cap 10m)
+               │
+               ├── (4xx != 429, DNS failure, HTTPS downgrade, or 30m exhausted)
+               ▼
+          dead_lettered ──(POST .../replay within 7d)──▶ replayed ──▶ delivering</code></pre>
+
+            <h3>2. API Additions (Additive, Non-Breaking)</h3>
+            <ul>
+                <li><strong>Inspect live deliveries &amp; failures:</strong> <code>GET /v3/webhook-subscriptions/{subId}/deliveries?status=retrying,dead_lettered&amp;event_id=...</code> — returns delivery state, attempt count, HTTP status, latency (ms), response snippet (first 512 bytes), next retry timestamp, and exact failure class (<code>timeout_10s</code>, <code>http_5xx</code>, <code>tls_error</code>, <code>dns_failed</code>).</li>
+                <li><strong>Self-serve idempotent replay:</strong> <code>POST /v3/webhook-subscriptions/{subId}/deliveries/{deliveryId}/replay</code> — assigns a new <code>delivery_id</code> (logged in header <code>webhook-id</code> per Standard Webhooks) while preserving the original <code>event_id</code> inside the JSON body and adding <code>"is_replay": true</code>. Existing integrations deduplicating on <code>event_id</code> remain safe unless they explicitly opt to reprocess replays.</li>
+                <li><strong>Zero-downtime secret rotation:</strong> <code>POST /v3/webhook-subscriptions/{subId}/rotate-secret</code> with <code>{ "grace_period_hours": 24 }</code> — mints a new <code>whsec_...</code> secret and signs every delivery with <em>both</em> secrets in space-separated <code>webhook-signature: v1,&lt;new&gt; v1,&lt;old&gt;</code> during the grace window (already supported natively by <code>standardwebhooks</code> and <code>client.webhooks.unwrap()</code>).</li>
+                <li><strong>CLI parity:</strong> Add <code>linq webhooks deliveries &lt;SUB_ID&gt; --failed</code> and <code>linq webhooks replay &lt;DELIVERY_ID&gt;</code> so developers can debug and replay without leaving the terminal.</li>
+            </ul>
+
+            <h3>3. Reference Agent Pattern (Quickstart Update)</h3>
+            <p>
+                Ship this 20-line pattern directly in the Node &amp; Python quickstarts so developers never hit the 10-second timeout / double-text failure mode:
+            </p>
+<pre><code>// 1. Verify raw body via Standard Webhooks + ack 200 immediately (&lt;200ms)
+// 2. Dedupe on event.event_id, enqueue async LLM run
+// 3. Pass message.idempotency_key derived from event.event_id when replying
+app.post('/webhooks/linq', rawBodyMiddleware, async (req, res) =&gt; {
+  const event = linq.webhooks.unwrap(req.rawBody, { headers: req.headers });
+  const isNew = await db.insertEventIfAbsent(event.event_id);
+  if (!isNew) return res.status(200).json({ deduped: true });
+
+  await agentQueue.enqueue({ eventId: event.event_id, payload: event });
+  return res.status(200).json({ accepted: true });
+});
+
+// Worker: safe against retries even if downstream LLM/API flakes
+await linq.chats.messages.create(chatId, {
+  message: {
+    parts: [{ type: 'text', value: agentReply }],
+    idempotency_key: `reply:${event.event_id}`,
+  },
+});</code></pre>
+
+            <h3>4. Success Metrics &amp; Rollout</h3>
+            <ul>
+                <li><strong>Primary:</strong> Median Time-to-First-Successful-Run (signup → verified inbound + outbound reply) drops under 10 minutes; dead-letter recovery rate via self-serve replay &gt;80%.</li>
+                <li><strong>Guardrails:</strong> Zero breaking changes for existing <code>2025-01-01</code> and <code>2026-02-03</code> subscribers; <code>p99</code> webhook dispatch latency unchanged during dual-secret signing.</li>
+            </ul>
+        </section>
+
+        <!-- PART 4: WHY ME -->
+        <section>
+            <h2>04 / Why This Maps Directly to My Background</h2>
+            <p>
+                At IBM, I've lived on both sides of this exact problem—building developer infrastructure and sitting directly with users to ship production AI agents:
+            </p>
+            <ul>
+                <li><strong>Developer Onboarding &amp; SDKs:</strong> Cut time-to-first-working-agent from <strong>~1 week to 1 day</strong> on our multi-agent platform by defining OpenAPI specs, generating typed C#/Python SDKs, and shipping a quickstart worker template.</li>
+                <li><strong>Task States, Retries &amp; Live Debugging:</strong> Designed durable job lifecycle states, retries, idempotency, deterministic guardrails, and end-to-end <strong>OpenTelemetry</strong> tracing for asynchronous multi-agent workflows.</li>
+                <li><strong>Voice &amp; Conversational Agents:</strong> Built a voice-enabled LLM agent on an <strong>MCP server</strong> from 0-to-1 to production (+26% / +0.8 out of 5 UX lift) and a phone-accessible <strong>Twilio</strong> AI voice agent for automated healthcare intake.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a class="mono-link" href="Naveed_Aria_Resume.pdf" target="_blank" rel="noopener noreferrer" title="Naveed Aria Resume">Resume PDF</a>
+                <a class="mono-link" href="mailto:naveedaria4@gmail.com">naveedaria4@gmail.com</a>
+                <a class="mono-link" href="https://github.com/naveedaria" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="mono-link" href="https://www.linkedin.com/in/naveedaria/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <span class="mono-link" style="cursor: default;">Prepared by Naveed Aria</span>
+        </footer>
+    </main>
+
+    <script>
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            function syncLabel() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+                themeToggle.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+            }
+            if (themeToggle) {
+                syncLabel();
+                themeToggle.addEventListener('click', function() {
+                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    if (isDark) {
+                        document.documentElement.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    syncLabel();
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
